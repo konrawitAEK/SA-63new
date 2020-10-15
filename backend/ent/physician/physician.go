@@ -12,18 +12,18 @@ const (
 	// FieldEMAIL holds the string denoting the email field in the database.
 	FieldEMAIL = "email"
 
-	// EdgeUser holds the string denoting the user edge name in mutations.
-	EdgeUser = "user"
+	// EdgeFormuser holds the string denoting the formuser edge name in mutations.
+	EdgeFormuser = "formuser"
 
 	// Table holds the table name of the physician in the database.
 	Table = "physicians"
-	// UserTable is the table the holds the user relation/edge.
-	UserTable = "positionassingments"
-	// UserInverseTable is the table name for the Positionassingment entity.
+	// FormuserTable is the table the holds the formuser relation/edge.
+	FormuserTable = "positionassingments"
+	// FormuserInverseTable is the table name for the Positionassingment entity.
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
-	UserInverseTable = "positionassingments"
-	// UserColumn is the table column denoting the user relation/edge.
-	UserColumn = "physician_user"
+	FormuserInverseTable = "positionassingments"
+	// FormuserColumn is the table column denoting the formuser relation/edge.
+	FormuserColumn = "physician_formuser"
 )
 
 // Columns holds all SQL columns for physician fields.

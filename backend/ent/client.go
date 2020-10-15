@@ -216,15 +216,15 @@ func (c *DepartmentClient) GetX(ctx context.Context, id int) *Department {
 	return d
 }
 
-// QueryDepartment queries the department edge of a Department.
-func (c *DepartmentClient) QueryDepartment(d *Department) *PositionassingmentQuery {
+// QueryFormdepartment queries the formdepartment edge of a Department.
+func (c *DepartmentClient) QueryFormdepartment(d *Department) *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := d.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(department.Table, department.FieldID, id),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, department.DepartmentTable, department.DepartmentColumn),
+			sqlgraph.Edge(sqlgraph.O2M, false, department.FormdepartmentTable, department.FormdepartmentColumn),
 		)
 		fromV = sqlgraph.Neighbors(d.driver.Dialect(), step)
 		return fromV, nil
@@ -315,15 +315,15 @@ func (c *PhysicianClient) GetX(ctx context.Context, id int) *Physician {
 	return ph
 }
 
-// QueryUser queries the user edge of a Physician.
-func (c *PhysicianClient) QueryUser(ph *Physician) *PositionassingmentQuery {
+// QueryFormuser queries the formuser edge of a Physician.
+func (c *PhysicianClient) QueryFormuser(ph *Physician) *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := ph.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(physician.Table, physician.FieldID, id),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, false, physician.UserTable, physician.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, physician.FormuserTable, physician.FormuserColumn),
 		)
 		fromV = sqlgraph.Neighbors(ph.driver.Dialect(), step)
 		return fromV, nil
@@ -414,15 +414,15 @@ func (c *PositionClient) GetX(ctx context.Context, id int) *Position {
 	return po
 }
 
-// QueryPosition queries the position edge of a Position.
-func (c *PositionClient) QueryPosition(po *Position) *PositionassingmentQuery {
+// QueryFormposition queries the formposition edge of a Position.
+func (c *PositionClient) QueryFormposition(po *Position) *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := po.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(position.Table, position.FieldID, id),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, position.PositionTable, position.PositionColumn),
+			sqlgraph.Edge(sqlgraph.O2M, false, position.FormpositionTable, position.FormpositionColumn),
 		)
 		fromV = sqlgraph.Neighbors(po.driver.Dialect(), step)
 		return fromV, nil
@@ -513,15 +513,15 @@ func (c *PositionassingmentClient) GetX(ctx context.Context, id int) *Positionas
 	return po
 }
 
-// QueryFormdata queries the formdata edge of a Positionassingment.
-func (c *PositionassingmentClient) QueryFormdata(po *Positionassingment) *PhysicianQuery {
+// QueryUser queries the user edge of a Positionassingment.
+func (c *PositionassingmentClient) QueryUser(po *Positionassingment) *PhysicianQuery {
 	query := &PhysicianQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := po.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, id),
 			sqlgraph.To(physician.Table, physician.FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, true, positionassingment.FormdataTable, positionassingment.FormdataColumn),
+			sqlgraph.Edge(sqlgraph.O2O, true, positionassingment.UserTable, positionassingment.UserColumn),
 		)
 		fromV = sqlgraph.Neighbors(po.driver.Dialect(), step)
 		return fromV, nil
@@ -529,15 +529,15 @@ func (c *PositionassingmentClient) QueryFormdata(po *Positionassingment) *Physic
 	return query
 }
 
-// QueryFormdepartment queries the formdepartment edge of a Positionassingment.
-func (c *PositionassingmentClient) QueryFormdepartment(po *Positionassingment) *DepartmentQuery {
+// QueryDepartment queries the department edge of a Positionassingment.
+func (c *PositionassingmentClient) QueryDepartment(po *Positionassingment) *DepartmentQuery {
 	query := &DepartmentQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := po.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, id),
 			sqlgraph.To(department.Table, department.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.FormdepartmentTable, positionassingment.FormdepartmentColumn),
+			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.DepartmentTable, positionassingment.DepartmentColumn),
 		)
 		fromV = sqlgraph.Neighbors(po.driver.Dialect(), step)
 		return fromV, nil
@@ -545,15 +545,15 @@ func (c *PositionassingmentClient) QueryFormdepartment(po *Positionassingment) *
 	return query
 }
 
-// QueryFormposition queries the formposition edge of a Positionassingment.
-func (c *PositionassingmentClient) QueryFormposition(po *Positionassingment) *PositionQuery {
+// QueryPosition queries the position edge of a Positionassingment.
+func (c *PositionassingmentClient) QueryPosition(po *Positionassingment) *PositionQuery {
 	query := &PositionQuery{config: c.config}
 	query.path = func(ctx context.Context) (fromV *sql.Selector, _ error) {
 		id := po.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, id),
 			sqlgraph.To(position.Table, position.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.FormpositionTable, positionassingment.FormpositionColumn),
+			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.PositionTable, positionassingment.PositionColumn),
 		)
 		fromV = sqlgraph.Neighbors(po.driver.Dialect(), step)
 		return fromV, nil

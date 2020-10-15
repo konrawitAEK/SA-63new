@@ -24,20 +24,20 @@ type Position struct {
 
 // PositionEdges holds the relations/edges for other nodes in the graph.
 type PositionEdges struct {
-	// Position holds the value of the position edge.
-	Position []*Positionassingment
+	// Formposition holds the value of the formposition edge.
+	Formposition []*Positionassingment
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [1]bool
 }
 
-// PositionOrErr returns the Position value or an error if the edge
+// FormpositionOrErr returns the Formposition value or an error if the edge
 // was not loaded in eager-loading.
-func (e PositionEdges) PositionOrErr() ([]*Positionassingment, error) {
+func (e PositionEdges) FormpositionOrErr() ([]*Positionassingment, error) {
 	if e.loadedTypes[0] {
-		return e.Position, nil
+		return e.Formposition, nil
 	}
-	return nil, &NotLoadedError{edge: "position"}
+	return nil, &NotLoadedError{edge: "formposition"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -68,9 +68,9 @@ func (po *Position) assignValues(values ...interface{}) error {
 	return nil
 }
 
-// QueryPosition queries the position edge of the Position.
-func (po *Position) QueryPosition() *PositionassingmentQuery {
-	return (&PositionClient{config: po.config}).QueryPosition(po)
+// QueryFormposition queries the formposition edge of the Position.
+func (po *Position) QueryFormposition() *PositionassingmentQuery {
+	return (&PositionClient{config: po.config}).QueryFormposition(po)
 }
 
 // Update returns a builder for updating this Position.

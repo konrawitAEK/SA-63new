@@ -176,25 +176,25 @@ func DayStartLTE(v time.Time) predicate.Positionassingment {
 	})
 }
 
-// HasFormdata applies the HasEdge predicate on the "formdata" edge.
-func HasFormdata() predicate.Positionassingment {
+// HasUser applies the HasEdge predicate on the "user" edge.
+func HasUser() predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormdataTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, true, FormdataTable, FormdataColumn),
+			sqlgraph.To(UserTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2O, true, UserTable, UserColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasFormdataWith applies the HasEdge predicate on the "formdata" edge with a given conditions (other predicates).
-func HasFormdataWith(preds ...predicate.Physician) predicate.Positionassingment {
+// HasUserWith applies the HasEdge predicate on the "user" edge with a given conditions (other predicates).
+func HasUserWith(preds ...predicate.Physician) predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormdataInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, true, FormdataTable, FormdataColumn),
+			sqlgraph.To(UserInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2O, true, UserTable, UserColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {
@@ -204,25 +204,25 @@ func HasFormdataWith(preds ...predicate.Physician) predicate.Positionassingment 
 	})
 }
 
-// HasFormdepartment applies the HasEdge predicate on the "formdepartment" edge.
-func HasFormdepartment() predicate.Positionassingment {
+// HasDepartment applies the HasEdge predicate on the "department" edge.
+func HasDepartment() predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormdepartmentTable, FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, FormdepartmentTable, FormdepartmentColumn),
+			sqlgraph.To(DepartmentTable, FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, DepartmentTable, DepartmentColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasFormdepartmentWith applies the HasEdge predicate on the "formdepartment" edge with a given conditions (other predicates).
-func HasFormdepartmentWith(preds ...predicate.Department) predicate.Positionassingment {
+// HasDepartmentWith applies the HasEdge predicate on the "department" edge with a given conditions (other predicates).
+func HasDepartmentWith(preds ...predicate.Department) predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormdepartmentInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, FormdepartmentTable, FormdepartmentColumn),
+			sqlgraph.To(DepartmentInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, DepartmentTable, DepartmentColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {
@@ -232,25 +232,25 @@ func HasFormdepartmentWith(preds ...predicate.Department) predicate.Positionassi
 	})
 }
 
-// HasFormposition applies the HasEdge predicate on the "formposition" edge.
-func HasFormposition() predicate.Positionassingment {
+// HasPosition applies the HasEdge predicate on the "position" edge.
+func HasPosition() predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormpositionTable, FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, FormpositionTable, FormpositionColumn),
+			sqlgraph.To(PositionTable, FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, PositionTable, PositionColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasFormpositionWith applies the HasEdge predicate on the "formposition" edge with a given conditions (other predicates).
-func HasFormpositionWith(preds ...predicate.Position) predicate.Positionassingment {
+// HasPositionWith applies the HasEdge predicate on the "position" edge with a given conditions (other predicates).
+func HasPositionWith(preds ...predicate.Position) predicate.Positionassingment {
 	return predicate.Positionassingment(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(FormpositionInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, FormpositionTable, FormpositionColumn),
+			sqlgraph.To(PositionInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, PositionTable, PositionColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

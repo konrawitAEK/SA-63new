@@ -34,19 +34,19 @@ func (du *DepartmentUpdate) SetDepartmentname(s string) *DepartmentUpdate {
 	return du
 }
 
-// AddDepartmentIDs adds the department edge to Positionassingment by ids.
-func (du *DepartmentUpdate) AddDepartmentIDs(ids ...int) *DepartmentUpdate {
-	du.mutation.AddDepartmentIDs(ids...)
+// AddFormdepartmentIDs adds the formdepartment edge to Positionassingment by ids.
+func (du *DepartmentUpdate) AddFormdepartmentIDs(ids ...int) *DepartmentUpdate {
+	du.mutation.AddFormdepartmentIDs(ids...)
 	return du
 }
 
-// AddDepartment adds the department edges to Positionassingment.
-func (du *DepartmentUpdate) AddDepartment(p ...*Positionassingment) *DepartmentUpdate {
+// AddFormdepartment adds the formdepartment edges to Positionassingment.
+func (du *DepartmentUpdate) AddFormdepartment(p ...*Positionassingment) *DepartmentUpdate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return du.AddDepartmentIDs(ids...)
+	return du.AddFormdepartmentIDs(ids...)
 }
 
 // Mutation returns the DepartmentMutation object of the builder.
@@ -54,19 +54,19 @@ func (du *DepartmentUpdate) Mutation() *DepartmentMutation {
 	return du.mutation
 }
 
-// RemoveDepartmentIDs removes the department edge to Positionassingment by ids.
-func (du *DepartmentUpdate) RemoveDepartmentIDs(ids ...int) *DepartmentUpdate {
-	du.mutation.RemoveDepartmentIDs(ids...)
+// RemoveFormdepartmentIDs removes the formdepartment edge to Positionassingment by ids.
+func (du *DepartmentUpdate) RemoveFormdepartmentIDs(ids ...int) *DepartmentUpdate {
+	du.mutation.RemoveFormdepartmentIDs(ids...)
 	return du
 }
 
-// RemoveDepartment removes department edges to Positionassingment.
-func (du *DepartmentUpdate) RemoveDepartment(p ...*Positionassingment) *DepartmentUpdate {
+// RemoveFormdepartment removes formdepartment edges to Positionassingment.
+func (du *DepartmentUpdate) RemoveFormdepartment(p ...*Positionassingment) *DepartmentUpdate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return du.RemoveDepartmentIDs(ids...)
+	return du.RemoveFormdepartmentIDs(ids...)
 }
 
 // Save executes the query and returns the number of rows/vertices matched by this operation.
@@ -146,12 +146,12 @@ func (du *DepartmentUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: department.FieldDepartmentname,
 		})
 	}
-	if nodes := du.mutation.RemovedDepartmentIDs(); len(nodes) > 0 {
+	if nodes := du.mutation.RemovedFormdepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   department.DepartmentTable,
-			Columns: []string{department.DepartmentColumn},
+			Table:   department.FormdepartmentTable,
+			Columns: []string{department.FormdepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -165,12 +165,12 @@ func (du *DepartmentUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := du.mutation.DepartmentIDs(); len(nodes) > 0 {
+	if nodes := du.mutation.FormdepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   department.DepartmentTable,
-			Columns: []string{department.DepartmentColumn},
+			Table:   department.FormdepartmentTable,
+			Columns: []string{department.FormdepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -208,19 +208,19 @@ func (duo *DepartmentUpdateOne) SetDepartmentname(s string) *DepartmentUpdateOne
 	return duo
 }
 
-// AddDepartmentIDs adds the department edge to Positionassingment by ids.
-func (duo *DepartmentUpdateOne) AddDepartmentIDs(ids ...int) *DepartmentUpdateOne {
-	duo.mutation.AddDepartmentIDs(ids...)
+// AddFormdepartmentIDs adds the formdepartment edge to Positionassingment by ids.
+func (duo *DepartmentUpdateOne) AddFormdepartmentIDs(ids ...int) *DepartmentUpdateOne {
+	duo.mutation.AddFormdepartmentIDs(ids...)
 	return duo
 }
 
-// AddDepartment adds the department edges to Positionassingment.
-func (duo *DepartmentUpdateOne) AddDepartment(p ...*Positionassingment) *DepartmentUpdateOne {
+// AddFormdepartment adds the formdepartment edges to Positionassingment.
+func (duo *DepartmentUpdateOne) AddFormdepartment(p ...*Positionassingment) *DepartmentUpdateOne {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return duo.AddDepartmentIDs(ids...)
+	return duo.AddFormdepartmentIDs(ids...)
 }
 
 // Mutation returns the DepartmentMutation object of the builder.
@@ -228,19 +228,19 @@ func (duo *DepartmentUpdateOne) Mutation() *DepartmentMutation {
 	return duo.mutation
 }
 
-// RemoveDepartmentIDs removes the department edge to Positionassingment by ids.
-func (duo *DepartmentUpdateOne) RemoveDepartmentIDs(ids ...int) *DepartmentUpdateOne {
-	duo.mutation.RemoveDepartmentIDs(ids...)
+// RemoveFormdepartmentIDs removes the formdepartment edge to Positionassingment by ids.
+func (duo *DepartmentUpdateOne) RemoveFormdepartmentIDs(ids ...int) *DepartmentUpdateOne {
+	duo.mutation.RemoveFormdepartmentIDs(ids...)
 	return duo
 }
 
-// RemoveDepartment removes department edges to Positionassingment.
-func (duo *DepartmentUpdateOne) RemoveDepartment(p ...*Positionassingment) *DepartmentUpdateOne {
+// RemoveFormdepartment removes formdepartment edges to Positionassingment.
+func (duo *DepartmentUpdateOne) RemoveFormdepartment(p ...*Positionassingment) *DepartmentUpdateOne {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return duo.RemoveDepartmentIDs(ids...)
+	return duo.RemoveFormdepartmentIDs(ids...)
 }
 
 // Save executes the query and returns the updated entity.
@@ -318,12 +318,12 @@ func (duo *DepartmentUpdateOne) sqlSave(ctx context.Context) (d *Department, err
 			Column: department.FieldDepartmentname,
 		})
 	}
-	if nodes := duo.mutation.RemovedDepartmentIDs(); len(nodes) > 0 {
+	if nodes := duo.mutation.RemovedFormdepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   department.DepartmentTable,
-			Columns: []string{department.DepartmentColumn},
+			Table:   department.FormdepartmentTable,
+			Columns: []string{department.FormdepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -337,12 +337,12 @@ func (duo *DepartmentUpdateOne) sqlSave(ctx context.Context) (d *Department, err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := duo.mutation.DepartmentIDs(); len(nodes) > 0 {
+	if nodes := duo.mutation.FormdepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   department.DepartmentTable,
-			Columns: []string{department.DepartmentColumn},
+			Table:   department.FormdepartmentTable,
+			Columns: []string{department.FormdepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

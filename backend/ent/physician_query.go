@@ -26,7 +26,7 @@ type PhysicianQuery struct {
 	unique     []string
 	predicates []predicate.Physician
 	// eager-loading edges.
-	withUser *PositionassingmentQuery
+	withFormuser *PositionassingmentQuery
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -56,8 +56,8 @@ func (pq *PhysicianQuery) Order(o ...OrderFunc) *PhysicianQuery {
 	return pq
 }
 
-// QueryUser chains the current query on the user edge.
-func (pq *PhysicianQuery) QueryUser() *PositionassingmentQuery {
+// QueryFormuser chains the current query on the formuser edge.
+func (pq *PhysicianQuery) QueryFormuser() *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: pq.config}
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
 		if err := pq.prepareQuery(ctx); err != nil {
@@ -66,7 +66,7 @@ func (pq *PhysicianQuery) QueryUser() *PositionassingmentQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(physician.Table, physician.FieldID, pq.sqlQuery()),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, false, physician.UserTable, physician.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, physician.FormuserTable, physician.FormuserColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(pq.driver.Dialect(), step)
 		return fromU, nil
@@ -253,14 +253,14 @@ func (pq *PhysicianQuery) Clone() *PhysicianQuery {
 	}
 }
 
-//  WithUser tells the query-builder to eager-loads the nodes that are connected to
-// the "user" edge. The optional arguments used to configure the query builder of the edge.
-func (pq *PhysicianQuery) WithUser(opts ...func(*PositionassingmentQuery)) *PhysicianQuery {
+//  WithFormuser tells the query-builder to eager-loads the nodes that are connected to
+// the "formuser" edge. The optional arguments used to configure the query builder of the edge.
+func (pq *PhysicianQuery) WithFormuser(opts ...func(*PositionassingmentQuery)) *PhysicianQuery {
 	query := &PositionassingmentQuery{config: pq.config}
 	for _, opt := range opts {
 		opt(query)
 	}
-	pq.withUser = query
+	pq.withFormuser = query
 	return pq
 }
 
@@ -331,7 +331,7 @@ func (pq *PhysicianQuery) sqlAll(ctx context.Context) ([]*Physician, error) {
 		nodes       = []*Physician{}
 		_spec       = pq.querySpec()
 		loadedTypes = [1]bool{
-			pq.withUser != nil,
+			pq.withFormuser != nil,
 		}
 	)
 	_spec.ScanValues = func() []interface{} {
@@ -355,7 +355,7 @@ func (pq *PhysicianQuery) sqlAll(ctx context.Context) ([]*Physician, error) {
 		return nodes, nil
 	}
 
-	if query := pq.withUser; query != nil {
+	if query := pq.withFormuser; query != nil {
 		fks := make([]driver.Value, 0, len(nodes))
 		nodeids := make(map[int]*Physician)
 		for i := range nodes {
@@ -364,22 +364,22 @@ func (pq *PhysicianQuery) sqlAll(ctx context.Context) ([]*Physician, error) {
 		}
 		query.withFKs = true
 		query.Where(predicate.Positionassingment(func(s *sql.Selector) {
-			s.Where(sql.InValues(physician.UserColumn, fks...))
+			s.Where(sql.InValues(physician.FormuserColumn, fks...))
 		}))
 		neighbors, err := query.All(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, n := range neighbors {
-			fk := n.physician_user
+			fk := n.physician_formuser
 			if fk == nil {
-				return nil, fmt.Errorf(`foreign-key "physician_user" is nil for node %v`, n.ID)
+				return nil, fmt.Errorf(`foreign-key "physician_formuser" is nil for node %v`, n.ID)
 			}
 			node, ok := nodeids[*fk]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "physician_user" returned %v for node %v`, *fk, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "physician_formuser" returned %v for node %v`, *fk, n.ID)
 			}
-			node.Edges.User = n
+			node.Edges.Formuser = n
 		}
 	}
 

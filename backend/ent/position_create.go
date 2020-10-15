@@ -26,19 +26,19 @@ func (pc *PositionCreate) SetNameposition(s string) *PositionCreate {
 	return pc
 }
 
-// AddPositionIDs adds the position edge to Positionassingment by ids.
-func (pc *PositionCreate) AddPositionIDs(ids ...int) *PositionCreate {
-	pc.mutation.AddPositionIDs(ids...)
+// AddFormpositionIDs adds the formposition edge to Positionassingment by ids.
+func (pc *PositionCreate) AddFormpositionIDs(ids ...int) *PositionCreate {
+	pc.mutation.AddFormpositionIDs(ids...)
 	return pc
 }
 
-// AddPosition adds the position edges to Positionassingment.
-func (pc *PositionCreate) AddPosition(p ...*Positionassingment) *PositionCreate {
+// AddFormposition adds the formposition edges to Positionassingment.
+func (pc *PositionCreate) AddFormposition(p ...*Positionassingment) *PositionCreate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return pc.AddPositionIDs(ids...)
+	return pc.AddFormpositionIDs(ids...)
 }
 
 // Mutation returns the PositionMutation object of the builder.
@@ -119,12 +119,12 @@ func (pc *PositionCreate) createSpec() (*Position, *sqlgraph.CreateSpec) {
 		})
 		po.Nameposition = value
 	}
-	if nodes := pc.mutation.PositionIDs(); len(nodes) > 0 {
+	if nodes := pc.mutation.FormpositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   position.PositionTable,
-			Columns: []string{position.PositionColumn},
+			Table:   position.FormpositionTable,
+			Columns: []string{position.FormpositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

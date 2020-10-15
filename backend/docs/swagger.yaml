@@ -4,11 +4,11 @@ definitions:
     properties:
       dayStart:
         type: string
-      formdata:
+      departmentid:
         type: integer
-      formdepartment:
+      physicianid:
         type: integer
-      formposition:
+      positionid:
         type: integer
     type: object
   ent.Department:
@@ -28,8 +28,8 @@ definitions:
     type: object
   ent.DepartmentEdges:
     properties:
-      department:
-        description: Department holds the value of the department edge.
+      formdepartment:
+        description: Formdepartment holds the value of the formdepartment edge.
         items:
           $ref: '#/definitions/ent.Positionassingment'
         type: array
@@ -54,9 +54,9 @@ definitions:
     type: object
   ent.PhysicianEdges:
     properties:
-      user:
+      formuser:
         $ref: '#/definitions/ent.Positionassingment'
-        description: User holds the value of the user edge.
+        description: Formuser holds the value of the formuser edge.
         type: object
     type: object
   ent.Position:
@@ -76,8 +76,8 @@ definitions:
     type: object
   ent.PositionEdges:
     properties:
-      position:
-        description: Position holds the value of the position edge.
+      formposition:
+        description: Formposition holds the value of the formposition edge.
         items:
           $ref: '#/definitions/ent.Positionassingment'
         type: array
@@ -99,17 +99,17 @@ definitions:
     type: object
   ent.PositionassingmentEdges:
     properties:
-      formdata:
-        $ref: '#/definitions/ent.Physician'
-        description: Formdata holds the value of the formdata edge.
-        type: object
-      formdepartment:
+      department:
         $ref: '#/definitions/ent.Department'
-        description: Formdepartment holds the value of the formdepartment edge.
+        description: Department holds the value of the department edge.
         type: object
-      formposition:
+      position:
         $ref: '#/definitions/ent.Position'
-        description: Formposition holds the value of the formposition edge.
+        description: Position holds the value of the position edge.
+        type: object
+      user:
+        $ref: '#/definitions/ent.Physician'
+        description: User holds the value of the user edge.
         type: object
     type: object
   gin.H:
@@ -356,7 +356,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/ent.Positionassingment'
+            $ref: '#/definitions/controllers.Positionassingment'
         "400":
           description: Bad Request
           schema:

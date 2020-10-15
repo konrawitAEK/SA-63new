@@ -40,23 +40,23 @@ func (pu *PhysicianUpdate) SetEMAIL(s string) *PhysicianUpdate {
 	return pu
 }
 
-// SetUserID sets the user edge to Positionassingment by id.
-func (pu *PhysicianUpdate) SetUserID(id int) *PhysicianUpdate {
-	pu.mutation.SetUserID(id)
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (pu *PhysicianUpdate) SetFormuserID(id int) *PhysicianUpdate {
+	pu.mutation.SetFormuserID(id)
 	return pu
 }
 
-// SetNillableUserID sets the user edge to Positionassingment by id if the given value is not nil.
-func (pu *PhysicianUpdate) SetNillableUserID(id *int) *PhysicianUpdate {
+// SetNillableFormuserID sets the formuser edge to Positionassingment by id if the given value is not nil.
+func (pu *PhysicianUpdate) SetNillableFormuserID(id *int) *PhysicianUpdate {
 	if id != nil {
-		pu = pu.SetUserID(*id)
+		pu = pu.SetFormuserID(*id)
 	}
 	return pu
 }
 
-// SetUser sets the user edge to Positionassingment.
-func (pu *PhysicianUpdate) SetUser(p *Positionassingment) *PhysicianUpdate {
-	return pu.SetUserID(p.ID)
+// SetFormuser sets the formuser edge to Positionassingment.
+func (pu *PhysicianUpdate) SetFormuser(p *Positionassingment) *PhysicianUpdate {
+	return pu.SetFormuserID(p.ID)
 }
 
 // Mutation returns the PhysicianMutation object of the builder.
@@ -64,9 +64,9 @@ func (pu *PhysicianUpdate) Mutation() *PhysicianMutation {
 	return pu.mutation
 }
 
-// ClearUser clears the user edge to Positionassingment.
-func (pu *PhysicianUpdate) ClearUser() *PhysicianUpdate {
-	pu.mutation.ClearUser()
+// ClearFormuser clears the formuser edge to Positionassingment.
+func (pu *PhysicianUpdate) ClearFormuser() *PhysicianUpdate {
+	pu.mutation.ClearFormuser()
 	return pu
 }
 
@@ -154,12 +154,12 @@ func (pu *PhysicianUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: physician.FieldEMAIL,
 		})
 	}
-	if pu.mutation.UserCleared() {
+	if pu.mutation.FormuserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: false,
-			Table:   physician.UserTable,
-			Columns: []string{physician.UserColumn},
+			Table:   physician.FormuserTable,
+			Columns: []string{physician.FormuserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -170,12 +170,12 @@ func (pu *PhysicianUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := pu.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.FormuserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: false,
-			Table:   physician.UserTable,
-			Columns: []string{physician.UserColumn},
+			Table:   physician.FormuserTable,
+			Columns: []string{physician.FormuserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -219,23 +219,23 @@ func (puo *PhysicianUpdateOne) SetEMAIL(s string) *PhysicianUpdateOne {
 	return puo
 }
 
-// SetUserID sets the user edge to Positionassingment by id.
-func (puo *PhysicianUpdateOne) SetUserID(id int) *PhysicianUpdateOne {
-	puo.mutation.SetUserID(id)
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (puo *PhysicianUpdateOne) SetFormuserID(id int) *PhysicianUpdateOne {
+	puo.mutation.SetFormuserID(id)
 	return puo
 }
 
-// SetNillableUserID sets the user edge to Positionassingment by id if the given value is not nil.
-func (puo *PhysicianUpdateOne) SetNillableUserID(id *int) *PhysicianUpdateOne {
+// SetNillableFormuserID sets the formuser edge to Positionassingment by id if the given value is not nil.
+func (puo *PhysicianUpdateOne) SetNillableFormuserID(id *int) *PhysicianUpdateOne {
 	if id != nil {
-		puo = puo.SetUserID(*id)
+		puo = puo.SetFormuserID(*id)
 	}
 	return puo
 }
 
-// SetUser sets the user edge to Positionassingment.
-func (puo *PhysicianUpdateOne) SetUser(p *Positionassingment) *PhysicianUpdateOne {
-	return puo.SetUserID(p.ID)
+// SetFormuser sets the formuser edge to Positionassingment.
+func (puo *PhysicianUpdateOne) SetFormuser(p *Positionassingment) *PhysicianUpdateOne {
+	return puo.SetFormuserID(p.ID)
 }
 
 // Mutation returns the PhysicianMutation object of the builder.
@@ -243,9 +243,9 @@ func (puo *PhysicianUpdateOne) Mutation() *PhysicianMutation {
 	return puo.mutation
 }
 
-// ClearUser clears the user edge to Positionassingment.
-func (puo *PhysicianUpdateOne) ClearUser() *PhysicianUpdateOne {
-	puo.mutation.ClearUser()
+// ClearFormuser clears the formuser edge to Positionassingment.
+func (puo *PhysicianUpdateOne) ClearFormuser() *PhysicianUpdateOne {
+	puo.mutation.ClearFormuser()
 	return puo
 }
 
@@ -331,12 +331,12 @@ func (puo *PhysicianUpdateOne) sqlSave(ctx context.Context) (ph *Physician, err 
 			Column: physician.FieldEMAIL,
 		})
 	}
-	if puo.mutation.UserCleared() {
+	if puo.mutation.FormuserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: false,
-			Table:   physician.UserTable,
-			Columns: []string{physician.UserColumn},
+			Table:   physician.FormuserTable,
+			Columns: []string{physician.FormuserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -347,12 +347,12 @@ func (puo *PhysicianUpdateOne) sqlSave(ctx context.Context) (ph *Physician, err 
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := puo.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.FormuserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: false,
-			Table:   physician.UserTable,
-			Columns: []string{physician.UserColumn},
+			Table:   physician.FormuserTable,
+			Columns: []string{physician.FormuserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

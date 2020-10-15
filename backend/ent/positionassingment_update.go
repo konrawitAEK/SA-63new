@@ -37,61 +37,61 @@ func (pu *PositionassingmentUpdate) SetDayStart(t time.Time) *Positionassingment
 	return pu
 }
 
-// SetFormdataID sets the formdata edge to Physician by id.
-func (pu *PositionassingmentUpdate) SetFormdataID(id int) *PositionassingmentUpdate {
-	pu.mutation.SetFormdataID(id)
+// SetUserID sets the user edge to Physician by id.
+func (pu *PositionassingmentUpdate) SetUserID(id int) *PositionassingmentUpdate {
+	pu.mutation.SetUserID(id)
 	return pu
 }
 
-// SetNillableFormdataID sets the formdata edge to Physician by id if the given value is not nil.
-func (pu *PositionassingmentUpdate) SetNillableFormdataID(id *int) *PositionassingmentUpdate {
+// SetNillableUserID sets the user edge to Physician by id if the given value is not nil.
+func (pu *PositionassingmentUpdate) SetNillableUserID(id *int) *PositionassingmentUpdate {
 	if id != nil {
-		pu = pu.SetFormdataID(*id)
+		pu = pu.SetUserID(*id)
 	}
 	return pu
 }
 
-// SetFormdata sets the formdata edge to Physician.
-func (pu *PositionassingmentUpdate) SetFormdata(p *Physician) *PositionassingmentUpdate {
-	return pu.SetFormdataID(p.ID)
+// SetUser sets the user edge to Physician.
+func (pu *PositionassingmentUpdate) SetUser(p *Physician) *PositionassingmentUpdate {
+	return pu.SetUserID(p.ID)
 }
 
-// SetFormdepartmentID sets the formdepartment edge to Department by id.
-func (pu *PositionassingmentUpdate) SetFormdepartmentID(id int) *PositionassingmentUpdate {
-	pu.mutation.SetFormdepartmentID(id)
+// SetDepartmentID sets the department edge to Department by id.
+func (pu *PositionassingmentUpdate) SetDepartmentID(id int) *PositionassingmentUpdate {
+	pu.mutation.SetDepartmentID(id)
 	return pu
 }
 
-// SetNillableFormdepartmentID sets the formdepartment edge to Department by id if the given value is not nil.
-func (pu *PositionassingmentUpdate) SetNillableFormdepartmentID(id *int) *PositionassingmentUpdate {
+// SetNillableDepartmentID sets the department edge to Department by id if the given value is not nil.
+func (pu *PositionassingmentUpdate) SetNillableDepartmentID(id *int) *PositionassingmentUpdate {
 	if id != nil {
-		pu = pu.SetFormdepartmentID(*id)
+		pu = pu.SetDepartmentID(*id)
 	}
 	return pu
 }
 
-// SetFormdepartment sets the formdepartment edge to Department.
-func (pu *PositionassingmentUpdate) SetFormdepartment(d *Department) *PositionassingmentUpdate {
-	return pu.SetFormdepartmentID(d.ID)
+// SetDepartment sets the department edge to Department.
+func (pu *PositionassingmentUpdate) SetDepartment(d *Department) *PositionassingmentUpdate {
+	return pu.SetDepartmentID(d.ID)
 }
 
-// SetFormpositionID sets the formposition edge to Position by id.
-func (pu *PositionassingmentUpdate) SetFormpositionID(id int) *PositionassingmentUpdate {
-	pu.mutation.SetFormpositionID(id)
+// SetPositionID sets the position edge to Position by id.
+func (pu *PositionassingmentUpdate) SetPositionID(id int) *PositionassingmentUpdate {
+	pu.mutation.SetPositionID(id)
 	return pu
 }
 
-// SetNillableFormpositionID sets the formposition edge to Position by id if the given value is not nil.
-func (pu *PositionassingmentUpdate) SetNillableFormpositionID(id *int) *PositionassingmentUpdate {
+// SetNillablePositionID sets the position edge to Position by id if the given value is not nil.
+func (pu *PositionassingmentUpdate) SetNillablePositionID(id *int) *PositionassingmentUpdate {
 	if id != nil {
-		pu = pu.SetFormpositionID(*id)
+		pu = pu.SetPositionID(*id)
 	}
 	return pu
 }
 
-// SetFormposition sets the formposition edge to Position.
-func (pu *PositionassingmentUpdate) SetFormposition(p *Position) *PositionassingmentUpdate {
-	return pu.SetFormpositionID(p.ID)
+// SetPosition sets the position edge to Position.
+func (pu *PositionassingmentUpdate) SetPosition(p *Position) *PositionassingmentUpdate {
+	return pu.SetPositionID(p.ID)
 }
 
 // Mutation returns the PositionassingmentMutation object of the builder.
@@ -99,21 +99,21 @@ func (pu *PositionassingmentUpdate) Mutation() *PositionassingmentMutation {
 	return pu.mutation
 }
 
-// ClearFormdata clears the formdata edge to Physician.
-func (pu *PositionassingmentUpdate) ClearFormdata() *PositionassingmentUpdate {
-	pu.mutation.ClearFormdata()
+// ClearUser clears the user edge to Physician.
+func (pu *PositionassingmentUpdate) ClearUser() *PositionassingmentUpdate {
+	pu.mutation.ClearUser()
 	return pu
 }
 
-// ClearFormdepartment clears the formdepartment edge to Department.
-func (pu *PositionassingmentUpdate) ClearFormdepartment() *PositionassingmentUpdate {
-	pu.mutation.ClearFormdepartment()
+// ClearDepartment clears the department edge to Department.
+func (pu *PositionassingmentUpdate) ClearDepartment() *PositionassingmentUpdate {
+	pu.mutation.ClearDepartment()
 	return pu
 }
 
-// ClearFormposition clears the formposition edge to Position.
-func (pu *PositionassingmentUpdate) ClearFormposition() *PositionassingmentUpdate {
-	pu.mutation.ClearFormposition()
+// ClearPosition clears the position edge to Position.
+func (pu *PositionassingmentUpdate) ClearPosition() *PositionassingmentUpdate {
+	pu.mutation.ClearPosition()
 	return pu
 }
 
@@ -194,12 +194,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 			Column: positionassingment.FieldDayStart,
 		})
 	}
-	if pu.mutation.FormdataCleared() {
+	if pu.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
-			Table:   positionassingment.FormdataTable,
-			Columns: []string{positionassingment.FormdataColumn},
+			Table:   positionassingment.UserTable,
+			Columns: []string{positionassingment.UserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -210,12 +210,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := pu.mutation.FormdataIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
-			Table:   positionassingment.FormdataTable,
-			Columns: []string{positionassingment.FormdataColumn},
+			Table:   positionassingment.UserTable,
+			Columns: []string{positionassingment.UserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -229,12 +229,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if pu.mutation.FormdepartmentCleared() {
+	if pu.mutation.DepartmentCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormdepartmentTable,
-			Columns: []string{positionassingment.FormdepartmentColumn},
+			Table:   positionassingment.DepartmentTable,
+			Columns: []string{positionassingment.DepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -245,12 +245,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := pu.mutation.FormdepartmentIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.DepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormdepartmentTable,
-			Columns: []string{positionassingment.FormdepartmentColumn},
+			Table:   positionassingment.DepartmentTable,
+			Columns: []string{positionassingment.DepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -264,12 +264,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if pu.mutation.FormpositionCleared() {
+	if pu.mutation.PositionCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormpositionTable,
-			Columns: []string{positionassingment.FormpositionColumn},
+			Table:   positionassingment.PositionTable,
+			Columns: []string{positionassingment.PositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -280,12 +280,12 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := pu.mutation.FormpositionIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.PositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormpositionTable,
-			Columns: []string{positionassingment.FormpositionColumn},
+			Table:   positionassingment.PositionTable,
+			Columns: []string{positionassingment.PositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -323,61 +323,61 @@ func (puo *PositionassingmentUpdateOne) SetDayStart(t time.Time) *Positionassing
 	return puo
 }
 
-// SetFormdataID sets the formdata edge to Physician by id.
-func (puo *PositionassingmentUpdateOne) SetFormdataID(id int) *PositionassingmentUpdateOne {
-	puo.mutation.SetFormdataID(id)
+// SetUserID sets the user edge to Physician by id.
+func (puo *PositionassingmentUpdateOne) SetUserID(id int) *PositionassingmentUpdateOne {
+	puo.mutation.SetUserID(id)
 	return puo
 }
 
-// SetNillableFormdataID sets the formdata edge to Physician by id if the given value is not nil.
-func (puo *PositionassingmentUpdateOne) SetNillableFormdataID(id *int) *PositionassingmentUpdateOne {
+// SetNillableUserID sets the user edge to Physician by id if the given value is not nil.
+func (puo *PositionassingmentUpdateOne) SetNillableUserID(id *int) *PositionassingmentUpdateOne {
 	if id != nil {
-		puo = puo.SetFormdataID(*id)
+		puo = puo.SetUserID(*id)
 	}
 	return puo
 }
 
-// SetFormdata sets the formdata edge to Physician.
-func (puo *PositionassingmentUpdateOne) SetFormdata(p *Physician) *PositionassingmentUpdateOne {
-	return puo.SetFormdataID(p.ID)
+// SetUser sets the user edge to Physician.
+func (puo *PositionassingmentUpdateOne) SetUser(p *Physician) *PositionassingmentUpdateOne {
+	return puo.SetUserID(p.ID)
 }
 
-// SetFormdepartmentID sets the formdepartment edge to Department by id.
-func (puo *PositionassingmentUpdateOne) SetFormdepartmentID(id int) *PositionassingmentUpdateOne {
-	puo.mutation.SetFormdepartmentID(id)
+// SetDepartmentID sets the department edge to Department by id.
+func (puo *PositionassingmentUpdateOne) SetDepartmentID(id int) *PositionassingmentUpdateOne {
+	puo.mutation.SetDepartmentID(id)
 	return puo
 }
 
-// SetNillableFormdepartmentID sets the formdepartment edge to Department by id if the given value is not nil.
-func (puo *PositionassingmentUpdateOne) SetNillableFormdepartmentID(id *int) *PositionassingmentUpdateOne {
+// SetNillableDepartmentID sets the department edge to Department by id if the given value is not nil.
+func (puo *PositionassingmentUpdateOne) SetNillableDepartmentID(id *int) *PositionassingmentUpdateOne {
 	if id != nil {
-		puo = puo.SetFormdepartmentID(*id)
+		puo = puo.SetDepartmentID(*id)
 	}
 	return puo
 }
 
-// SetFormdepartment sets the formdepartment edge to Department.
-func (puo *PositionassingmentUpdateOne) SetFormdepartment(d *Department) *PositionassingmentUpdateOne {
-	return puo.SetFormdepartmentID(d.ID)
+// SetDepartment sets the department edge to Department.
+func (puo *PositionassingmentUpdateOne) SetDepartment(d *Department) *PositionassingmentUpdateOne {
+	return puo.SetDepartmentID(d.ID)
 }
 
-// SetFormpositionID sets the formposition edge to Position by id.
-func (puo *PositionassingmentUpdateOne) SetFormpositionID(id int) *PositionassingmentUpdateOne {
-	puo.mutation.SetFormpositionID(id)
+// SetPositionID sets the position edge to Position by id.
+func (puo *PositionassingmentUpdateOne) SetPositionID(id int) *PositionassingmentUpdateOne {
+	puo.mutation.SetPositionID(id)
 	return puo
 }
 
-// SetNillableFormpositionID sets the formposition edge to Position by id if the given value is not nil.
-func (puo *PositionassingmentUpdateOne) SetNillableFormpositionID(id *int) *PositionassingmentUpdateOne {
+// SetNillablePositionID sets the position edge to Position by id if the given value is not nil.
+func (puo *PositionassingmentUpdateOne) SetNillablePositionID(id *int) *PositionassingmentUpdateOne {
 	if id != nil {
-		puo = puo.SetFormpositionID(*id)
+		puo = puo.SetPositionID(*id)
 	}
 	return puo
 }
 
-// SetFormposition sets the formposition edge to Position.
-func (puo *PositionassingmentUpdateOne) SetFormposition(p *Position) *PositionassingmentUpdateOne {
-	return puo.SetFormpositionID(p.ID)
+// SetPosition sets the position edge to Position.
+func (puo *PositionassingmentUpdateOne) SetPosition(p *Position) *PositionassingmentUpdateOne {
+	return puo.SetPositionID(p.ID)
 }
 
 // Mutation returns the PositionassingmentMutation object of the builder.
@@ -385,21 +385,21 @@ func (puo *PositionassingmentUpdateOne) Mutation() *PositionassingmentMutation {
 	return puo.mutation
 }
 
-// ClearFormdata clears the formdata edge to Physician.
-func (puo *PositionassingmentUpdateOne) ClearFormdata() *PositionassingmentUpdateOne {
-	puo.mutation.ClearFormdata()
+// ClearUser clears the user edge to Physician.
+func (puo *PositionassingmentUpdateOne) ClearUser() *PositionassingmentUpdateOne {
+	puo.mutation.ClearUser()
 	return puo
 }
 
-// ClearFormdepartment clears the formdepartment edge to Department.
-func (puo *PositionassingmentUpdateOne) ClearFormdepartment() *PositionassingmentUpdateOne {
-	puo.mutation.ClearFormdepartment()
+// ClearDepartment clears the department edge to Department.
+func (puo *PositionassingmentUpdateOne) ClearDepartment() *PositionassingmentUpdateOne {
+	puo.mutation.ClearDepartment()
 	return puo
 }
 
-// ClearFormposition clears the formposition edge to Position.
-func (puo *PositionassingmentUpdateOne) ClearFormposition() *PositionassingmentUpdateOne {
-	puo.mutation.ClearFormposition()
+// ClearPosition clears the position edge to Position.
+func (puo *PositionassingmentUpdateOne) ClearPosition() *PositionassingmentUpdateOne {
+	puo.mutation.ClearPosition()
 	return puo
 }
 
@@ -478,12 +478,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 			Column: positionassingment.FieldDayStart,
 		})
 	}
-	if puo.mutation.FormdataCleared() {
+	if puo.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
-			Table:   positionassingment.FormdataTable,
-			Columns: []string{positionassingment.FormdataColumn},
+			Table:   positionassingment.UserTable,
+			Columns: []string{positionassingment.UserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -494,12 +494,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := puo.mutation.FormdataIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
-			Table:   positionassingment.FormdataTable,
-			Columns: []string{positionassingment.FormdataColumn},
+			Table:   positionassingment.UserTable,
+			Columns: []string{positionassingment.UserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -513,12 +513,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if puo.mutation.FormdepartmentCleared() {
+	if puo.mutation.DepartmentCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormdepartmentTable,
-			Columns: []string{positionassingment.FormdepartmentColumn},
+			Table:   positionassingment.DepartmentTable,
+			Columns: []string{positionassingment.DepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -529,12 +529,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := puo.mutation.FormdepartmentIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.DepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormdepartmentTable,
-			Columns: []string{positionassingment.FormdepartmentColumn},
+			Table:   positionassingment.DepartmentTable,
+			Columns: []string{positionassingment.DepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -548,12 +548,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if puo.mutation.FormpositionCleared() {
+	if puo.mutation.PositionCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormpositionTable,
-			Columns: []string{positionassingment.FormpositionColumn},
+			Table:   positionassingment.PositionTable,
+			Columns: []string{positionassingment.PositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -564,12 +564,12 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := puo.mutation.FormpositionIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.PositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormpositionTable,
-			Columns: []string{positionassingment.FormpositionColumn},
+			Table:   positionassingment.PositionTable,
+			Columns: []string{positionassingment.PositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

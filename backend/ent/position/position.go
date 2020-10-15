@@ -10,18 +10,18 @@ const (
 	// FieldNameposition holds the string denoting the nameposition field in the database.
 	FieldNameposition = "nameposition"
 
-	// EdgePosition holds the string denoting the position edge name in mutations.
-	EdgePosition = "position"
+	// EdgeFormposition holds the string denoting the formposition edge name in mutations.
+	EdgeFormposition = "formposition"
 
 	// Table holds the table name of the position in the database.
 	Table = "positions"
-	// PositionTable is the table the holds the position relation/edge.
-	PositionTable = "positionassingments"
-	// PositionInverseTable is the table name for the Positionassingment entity.
+	// FormpositionTable is the table the holds the formposition relation/edge.
+	FormpositionTable = "positionassingments"
+	// FormpositionInverseTable is the table name for the Positionassingment entity.
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
-	PositionInverseTable = "positionassingments"
-	// PositionColumn is the table column denoting the position relation/edge.
-	PositionColumn = "position_position"
+	FormpositionInverseTable = "positionassingments"
+	// FormpositionColumn is the table column denoting the formposition relation/edge.
+	FormpositionColumn = "position_formposition"
 )
 
 // Columns holds all SQL columns for position fields.

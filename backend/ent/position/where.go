@@ -209,25 +209,25 @@ func NamepositionContainsFold(v string) predicate.Position {
 	})
 }
 
-// HasPosition applies the HasEdge predicate on the "position" edge.
-func HasPosition() predicate.Position {
+// HasFormposition applies the HasEdge predicate on the "formposition" edge.
+func HasFormposition() predicate.Position {
 	return predicate.Position(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(PositionTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, PositionTable, PositionColumn),
+			sqlgraph.To(FormpositionTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, FormpositionTable, FormpositionColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasPositionWith applies the HasEdge predicate on the "position" edge with a given conditions (other predicates).
-func HasPositionWith(preds ...predicate.Positionassingment) predicate.Position {
+// HasFormpositionWith applies the HasEdge predicate on the "formposition" edge with a given conditions (other predicates).
+func HasFormpositionWith(preds ...predicate.Positionassingment) predicate.Position {
 	return predicate.Position(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(PositionInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, PositionTable, PositionColumn),
+			sqlgraph.To(FormpositionInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, FormpositionTable, FormpositionColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

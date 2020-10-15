@@ -24,20 +24,20 @@ type Department struct {
 
 // DepartmentEdges holds the relations/edges for other nodes in the graph.
 type DepartmentEdges struct {
-	// Department holds the value of the department edge.
-	Department []*Positionassingment
+	// Formdepartment holds the value of the formdepartment edge.
+	Formdepartment []*Positionassingment
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [1]bool
 }
 
-// DepartmentOrErr returns the Department value or an error if the edge
+// FormdepartmentOrErr returns the Formdepartment value or an error if the edge
 // was not loaded in eager-loading.
-func (e DepartmentEdges) DepartmentOrErr() ([]*Positionassingment, error) {
+func (e DepartmentEdges) FormdepartmentOrErr() ([]*Positionassingment, error) {
 	if e.loadedTypes[0] {
-		return e.Department, nil
+		return e.Formdepartment, nil
 	}
-	return nil, &NotLoadedError{edge: "department"}
+	return nil, &NotLoadedError{edge: "formdepartment"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -68,9 +68,9 @@ func (d *Department) assignValues(values ...interface{}) error {
 	return nil
 }
 
-// QueryDepartment queries the department edge of the Department.
-func (d *Department) QueryDepartment() *PositionassingmentQuery {
-	return (&DepartmentClient{config: d.config}).QueryDepartment(d)
+// QueryFormdepartment queries the formdepartment edge of the Department.
+func (d *Department) QueryFormdepartment() *PositionassingmentQuery {
+	return (&DepartmentClient{config: d.config}).QueryFormdepartment(d)
 }
 
 // Update returns a builder for updating this Department.

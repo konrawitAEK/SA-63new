@@ -35,15 +35,15 @@ const (
 // nodes in the graph.
 type DepartmentMutation struct {
 	config
-	op                Op
-	typ               string
-	id                *int
-	_Departmentname   *string
-	clearedFields     map[string]struct{}
-	department        map[int]struct{}
-	removeddepartment map[int]struct{}
-	done              bool
-	oldValue          func(context.Context) (*Department, error)
+	op                    Op
+	typ                   string
+	id                    *int
+	_Departmentname       *string
+	clearedFields         map[string]struct{}
+	formdepartment        map[int]struct{}
+	removedformdepartment map[int]struct{}
+	done                  bool
+	oldValue              func(context.Context) (*Department, error)
 }
 
 var _ ent.Mutation = (*DepartmentMutation)(nil)
@@ -162,46 +162,46 @@ func (m *DepartmentMutation) ResetDepartmentname() {
 	m._Departmentname = nil
 }
 
-// AddDepartmentIDs adds the department edge to Positionassingment by ids.
-func (m *DepartmentMutation) AddDepartmentIDs(ids ...int) {
-	if m.department == nil {
-		m.department = make(map[int]struct{})
+// AddFormdepartmentIDs adds the formdepartment edge to Positionassingment by ids.
+func (m *DepartmentMutation) AddFormdepartmentIDs(ids ...int) {
+	if m.formdepartment == nil {
+		m.formdepartment = make(map[int]struct{})
 	}
 	for i := range ids {
-		m.department[ids[i]] = struct{}{}
+		m.formdepartment[ids[i]] = struct{}{}
 	}
 }
 
-// RemoveDepartmentIDs removes the department edge to Positionassingment by ids.
-func (m *DepartmentMutation) RemoveDepartmentIDs(ids ...int) {
-	if m.removeddepartment == nil {
-		m.removeddepartment = make(map[int]struct{})
+// RemoveFormdepartmentIDs removes the formdepartment edge to Positionassingment by ids.
+func (m *DepartmentMutation) RemoveFormdepartmentIDs(ids ...int) {
+	if m.removedformdepartment == nil {
+		m.removedformdepartment = make(map[int]struct{})
 	}
 	for i := range ids {
-		m.removeddepartment[ids[i]] = struct{}{}
+		m.removedformdepartment[ids[i]] = struct{}{}
 	}
 }
 
-// RemovedDepartment returns the removed ids of department.
-func (m *DepartmentMutation) RemovedDepartmentIDs() (ids []int) {
-	for id := range m.removeddepartment {
+// RemovedFormdepartment returns the removed ids of formdepartment.
+func (m *DepartmentMutation) RemovedFormdepartmentIDs() (ids []int) {
+	for id := range m.removedformdepartment {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// DepartmentIDs returns the department ids in the mutation.
-func (m *DepartmentMutation) DepartmentIDs() (ids []int) {
-	for id := range m.department {
+// FormdepartmentIDs returns the formdepartment ids in the mutation.
+func (m *DepartmentMutation) FormdepartmentIDs() (ids []int) {
+	for id := range m.formdepartment {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// ResetDepartment reset all changes of the "department" edge.
-func (m *DepartmentMutation) ResetDepartment() {
-	m.department = nil
-	m.removeddepartment = nil
+// ResetFormdepartment reset all changes of the "formdepartment" edge.
+func (m *DepartmentMutation) ResetFormdepartment() {
+	m.formdepartment = nil
+	m.removedformdepartment = nil
 }
 
 // Op returns the operation name.
@@ -320,8 +320,8 @@ func (m *DepartmentMutation) ResetField(name string) error {
 // mutation.
 func (m *DepartmentMutation) AddedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.department != nil {
-		edges = append(edges, department.EdgeDepartment)
+	if m.formdepartment != nil {
+		edges = append(edges, department.EdgeFormdepartment)
 	}
 	return edges
 }
@@ -330,9 +330,9 @@ func (m *DepartmentMutation) AddedEdges() []string {
 // the given edge name.
 func (m *DepartmentMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case department.EdgeDepartment:
-		ids := make([]ent.Value, 0, len(m.department))
-		for id := range m.department {
+	case department.EdgeFormdepartment:
+		ids := make([]ent.Value, 0, len(m.formdepartment))
+		for id := range m.formdepartment {
 			ids = append(ids, id)
 		}
 		return ids
@@ -344,8 +344,8 @@ func (m *DepartmentMutation) AddedIDs(name string) []ent.Value {
 // mutation.
 func (m *DepartmentMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.removeddepartment != nil {
-		edges = append(edges, department.EdgeDepartment)
+	if m.removedformdepartment != nil {
+		edges = append(edges, department.EdgeFormdepartment)
 	}
 	return edges
 }
@@ -354,9 +354,9 @@ func (m *DepartmentMutation) RemovedEdges() []string {
 // the given edge name.
 func (m *DepartmentMutation) RemovedIDs(name string) []ent.Value {
 	switch name {
-	case department.EdgeDepartment:
-		ids := make([]ent.Value, 0, len(m.removeddepartment))
-		for id := range m.removeddepartment {
+	case department.EdgeFormdepartment:
+		ids := make([]ent.Value, 0, len(m.removedformdepartment))
+		for id := range m.removedformdepartment {
 			ids = append(ids, id)
 		}
 		return ids
@@ -392,8 +392,8 @@ func (m *DepartmentMutation) ClearEdge(name string) error {
 // defined in the schema.
 func (m *DepartmentMutation) ResetEdge(name string) error {
 	switch name {
-	case department.EdgeDepartment:
-		m.ResetDepartment()
+	case department.EdgeFormdepartment:
+		m.ResetFormdepartment()
 		return nil
 	}
 	return fmt.Errorf("unknown Department edge %s", name)
@@ -403,16 +403,16 @@ func (m *DepartmentMutation) ResetEdge(name string) error {
 // nodes in the graph.
 type PhysicianMutation struct {
 	config
-	op            Op
-	typ           string
-	id            *int
-	_NAME         *string
-	_EMAIL        *string
-	clearedFields map[string]struct{}
-	user          *int
-	cleareduser   bool
-	done          bool
-	oldValue      func(context.Context) (*Physician, error)
+	op              Op
+	typ             string
+	id              *int
+	_NAME           *string
+	_EMAIL          *string
+	clearedFields   map[string]struct{}
+	formuser        *int
+	clearedformuser bool
+	done            bool
+	oldValue        func(context.Context) (*Physician, error)
 }
 
 var _ ent.Mutation = (*PhysicianMutation)(nil)
@@ -568,43 +568,43 @@ func (m *PhysicianMutation) ResetEMAIL() {
 	m._EMAIL = nil
 }
 
-// SetUserID sets the user edge to Positionassingment by id.
-func (m *PhysicianMutation) SetUserID(id int) {
-	m.user = &id
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (m *PhysicianMutation) SetFormuserID(id int) {
+	m.formuser = &id
 }
 
-// ClearUser clears the user edge to Positionassingment.
-func (m *PhysicianMutation) ClearUser() {
-	m.cleareduser = true
+// ClearFormuser clears the formuser edge to Positionassingment.
+func (m *PhysicianMutation) ClearFormuser() {
+	m.clearedformuser = true
 }
 
-// UserCleared returns if the edge user was cleared.
-func (m *PhysicianMutation) UserCleared() bool {
-	return m.cleareduser
+// FormuserCleared returns if the edge formuser was cleared.
+func (m *PhysicianMutation) FormuserCleared() bool {
+	return m.clearedformuser
 }
 
-// UserID returns the user id in the mutation.
-func (m *PhysicianMutation) UserID() (id int, exists bool) {
-	if m.user != nil {
-		return *m.user, true
+// FormuserID returns the formuser id in the mutation.
+func (m *PhysicianMutation) FormuserID() (id int, exists bool) {
+	if m.formuser != nil {
+		return *m.formuser, true
 	}
 	return
 }
 
-// UserIDs returns the user ids in the mutation.
+// FormuserIDs returns the formuser ids in the mutation.
 // Note that ids always returns len(ids) <= 1 for unique edges, and you should use
-// UserID instead. It exists only for internal usage by the builders.
-func (m *PhysicianMutation) UserIDs() (ids []int) {
-	if id := m.user; id != nil {
+// FormuserID instead. It exists only for internal usage by the builders.
+func (m *PhysicianMutation) FormuserIDs() (ids []int) {
+	if id := m.formuser; id != nil {
 		ids = append(ids, *id)
 	}
 	return
 }
 
-// ResetUser reset all changes of the "user" edge.
-func (m *PhysicianMutation) ResetUser() {
-	m.user = nil
-	m.cleareduser = false
+// ResetFormuser reset all changes of the "formuser" edge.
+func (m *PhysicianMutation) ResetFormuser() {
+	m.formuser = nil
+	m.clearedformuser = false
 }
 
 // Op returns the operation name.
@@ -740,8 +740,8 @@ func (m *PhysicianMutation) ResetField(name string) error {
 // mutation.
 func (m *PhysicianMutation) AddedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.user != nil {
-		edges = append(edges, physician.EdgeUser)
+	if m.formuser != nil {
+		edges = append(edges, physician.EdgeFormuser)
 	}
 	return edges
 }
@@ -750,8 +750,8 @@ func (m *PhysicianMutation) AddedEdges() []string {
 // the given edge name.
 func (m *PhysicianMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case physician.EdgeUser:
-		if id := m.user; id != nil {
+	case physician.EdgeFormuser:
+		if id := m.formuser; id != nil {
 			return []ent.Value{*id}
 		}
 	}
@@ -777,8 +777,8 @@ func (m *PhysicianMutation) RemovedIDs(name string) []ent.Value {
 // mutation.
 func (m *PhysicianMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.cleareduser {
-		edges = append(edges, physician.EdgeUser)
+	if m.clearedformuser {
+		edges = append(edges, physician.EdgeFormuser)
 	}
 	return edges
 }
@@ -787,8 +787,8 @@ func (m *PhysicianMutation) ClearedEdges() []string {
 // cleared in this mutation.
 func (m *PhysicianMutation) EdgeCleared(name string) bool {
 	switch name {
-	case physician.EdgeUser:
-		return m.cleareduser
+	case physician.EdgeFormuser:
+		return m.clearedformuser
 	}
 	return false
 }
@@ -797,8 +797,8 @@ func (m *PhysicianMutation) EdgeCleared(name string) bool {
 // error if the edge name is not defined in the schema.
 func (m *PhysicianMutation) ClearEdge(name string) error {
 	switch name {
-	case physician.EdgeUser:
-		m.ClearUser()
+	case physician.EdgeFormuser:
+		m.ClearFormuser()
 		return nil
 	}
 	return fmt.Errorf("unknown Physician unique edge %s", name)
@@ -809,8 +809,8 @@ func (m *PhysicianMutation) ClearEdge(name string) error {
 // defined in the schema.
 func (m *PhysicianMutation) ResetEdge(name string) error {
 	switch name {
-	case physician.EdgeUser:
-		m.ResetUser()
+	case physician.EdgeFormuser:
+		m.ResetFormuser()
 		return nil
 	}
 	return fmt.Errorf("unknown Physician edge %s", name)
@@ -820,15 +820,15 @@ func (m *PhysicianMutation) ResetEdge(name string) error {
 // nodes in the graph.
 type PositionMutation struct {
 	config
-	op              Op
-	typ             string
-	id              *int
-	_Nameposition   *string
-	clearedFields   map[string]struct{}
-	position        map[int]struct{}
-	removedposition map[int]struct{}
-	done            bool
-	oldValue        func(context.Context) (*Position, error)
+	op                  Op
+	typ                 string
+	id                  *int
+	_Nameposition       *string
+	clearedFields       map[string]struct{}
+	formposition        map[int]struct{}
+	removedformposition map[int]struct{}
+	done                bool
+	oldValue            func(context.Context) (*Position, error)
 }
 
 var _ ent.Mutation = (*PositionMutation)(nil)
@@ -947,46 +947,46 @@ func (m *PositionMutation) ResetNameposition() {
 	m._Nameposition = nil
 }
 
-// AddPositionIDs adds the position edge to Positionassingment by ids.
-func (m *PositionMutation) AddPositionIDs(ids ...int) {
-	if m.position == nil {
-		m.position = make(map[int]struct{})
+// AddFormpositionIDs adds the formposition edge to Positionassingment by ids.
+func (m *PositionMutation) AddFormpositionIDs(ids ...int) {
+	if m.formposition == nil {
+		m.formposition = make(map[int]struct{})
 	}
 	for i := range ids {
-		m.position[ids[i]] = struct{}{}
+		m.formposition[ids[i]] = struct{}{}
 	}
 }
 
-// RemovePositionIDs removes the position edge to Positionassingment by ids.
-func (m *PositionMutation) RemovePositionIDs(ids ...int) {
-	if m.removedposition == nil {
-		m.removedposition = make(map[int]struct{})
+// RemoveFormpositionIDs removes the formposition edge to Positionassingment by ids.
+func (m *PositionMutation) RemoveFormpositionIDs(ids ...int) {
+	if m.removedformposition == nil {
+		m.removedformposition = make(map[int]struct{})
 	}
 	for i := range ids {
-		m.removedposition[ids[i]] = struct{}{}
+		m.removedformposition[ids[i]] = struct{}{}
 	}
 }
 
-// RemovedPosition returns the removed ids of position.
-func (m *PositionMutation) RemovedPositionIDs() (ids []int) {
-	for id := range m.removedposition {
+// RemovedFormposition returns the removed ids of formposition.
+func (m *PositionMutation) RemovedFormpositionIDs() (ids []int) {
+	for id := range m.removedformposition {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// PositionIDs returns the position ids in the mutation.
-func (m *PositionMutation) PositionIDs() (ids []int) {
-	for id := range m.position {
+// FormpositionIDs returns the formposition ids in the mutation.
+func (m *PositionMutation) FormpositionIDs() (ids []int) {
+	for id := range m.formposition {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// ResetPosition reset all changes of the "position" edge.
-func (m *PositionMutation) ResetPosition() {
-	m.position = nil
-	m.removedposition = nil
+// ResetFormposition reset all changes of the "formposition" edge.
+func (m *PositionMutation) ResetFormposition() {
+	m.formposition = nil
+	m.removedformposition = nil
 }
 
 // Op returns the operation name.
@@ -1105,8 +1105,8 @@ func (m *PositionMutation) ResetField(name string) error {
 // mutation.
 func (m *PositionMutation) AddedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.position != nil {
-		edges = append(edges, position.EdgePosition)
+	if m.formposition != nil {
+		edges = append(edges, position.EdgeFormposition)
 	}
 	return edges
 }
@@ -1115,9 +1115,9 @@ func (m *PositionMutation) AddedEdges() []string {
 // the given edge name.
 func (m *PositionMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case position.EdgePosition:
-		ids := make([]ent.Value, 0, len(m.position))
-		for id := range m.position {
+	case position.EdgeFormposition:
+		ids := make([]ent.Value, 0, len(m.formposition))
+		for id := range m.formposition {
 			ids = append(ids, id)
 		}
 		return ids
@@ -1129,8 +1129,8 @@ func (m *PositionMutation) AddedIDs(name string) []ent.Value {
 // mutation.
 func (m *PositionMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.removedposition != nil {
-		edges = append(edges, position.EdgePosition)
+	if m.removedformposition != nil {
+		edges = append(edges, position.EdgeFormposition)
 	}
 	return edges
 }
@@ -1139,9 +1139,9 @@ func (m *PositionMutation) RemovedEdges() []string {
 // the given edge name.
 func (m *PositionMutation) RemovedIDs(name string) []ent.Value {
 	switch name {
-	case position.EdgePosition:
-		ids := make([]ent.Value, 0, len(m.removedposition))
-		for id := range m.removedposition {
+	case position.EdgeFormposition:
+		ids := make([]ent.Value, 0, len(m.removedformposition))
+		for id := range m.removedformposition {
 			ids = append(ids, id)
 		}
 		return ids
@@ -1177,8 +1177,8 @@ func (m *PositionMutation) ClearEdge(name string) error {
 // defined in the schema.
 func (m *PositionMutation) ResetEdge(name string) error {
 	switch name {
-	case position.EdgePosition:
-		m.ResetPosition()
+	case position.EdgeFormposition:
+		m.ResetFormposition()
 		return nil
 	}
 	return fmt.Errorf("unknown Position edge %s", name)
@@ -1188,19 +1188,19 @@ func (m *PositionMutation) ResetEdge(name string) error {
 // nodes in the graph.
 type PositionassingmentMutation struct {
 	config
-	op                    Op
-	typ                   string
-	id                    *int
-	_DayStart             *time.Time
-	clearedFields         map[string]struct{}
-	formdata              *int
-	clearedformdata       bool
-	formdepartment        *int
-	clearedformdepartment bool
-	formposition          *int
-	clearedformposition   bool
-	done                  bool
-	oldValue              func(context.Context) (*Positionassingment, error)
+	op                Op
+	typ               string
+	id                *int
+	_DayStart         *time.Time
+	clearedFields     map[string]struct{}
+	user              *int
+	cleareduser       bool
+	department        *int
+	cleareddepartment bool
+	position          *int
+	clearedposition   bool
+	done              bool
+	oldValue          func(context.Context) (*Positionassingment, error)
 }
 
 var _ ent.Mutation = (*PositionassingmentMutation)(nil)
@@ -1319,121 +1319,121 @@ func (m *PositionassingmentMutation) ResetDayStart() {
 	m._DayStart = nil
 }
 
-// SetFormdataID sets the formdata edge to Physician by id.
-func (m *PositionassingmentMutation) SetFormdataID(id int) {
-	m.formdata = &id
+// SetUserID sets the user edge to Physician by id.
+func (m *PositionassingmentMutation) SetUserID(id int) {
+	m.user = &id
 }
 
-// ClearFormdata clears the formdata edge to Physician.
-func (m *PositionassingmentMutation) ClearFormdata() {
-	m.clearedformdata = true
+// ClearUser clears the user edge to Physician.
+func (m *PositionassingmentMutation) ClearUser() {
+	m.cleareduser = true
 }
 
-// FormdataCleared returns if the edge formdata was cleared.
-func (m *PositionassingmentMutation) FormdataCleared() bool {
-	return m.clearedformdata
+// UserCleared returns if the edge user was cleared.
+func (m *PositionassingmentMutation) UserCleared() bool {
+	return m.cleareduser
 }
 
-// FormdataID returns the formdata id in the mutation.
-func (m *PositionassingmentMutation) FormdataID() (id int, exists bool) {
-	if m.formdata != nil {
-		return *m.formdata, true
+// UserID returns the user id in the mutation.
+func (m *PositionassingmentMutation) UserID() (id int, exists bool) {
+	if m.user != nil {
+		return *m.user, true
 	}
 	return
 }
 
-// FormdataIDs returns the formdata ids in the mutation.
+// UserIDs returns the user ids in the mutation.
 // Note that ids always returns len(ids) <= 1 for unique edges, and you should use
-// FormdataID instead. It exists only for internal usage by the builders.
-func (m *PositionassingmentMutation) FormdataIDs() (ids []int) {
-	if id := m.formdata; id != nil {
+// UserID instead. It exists only for internal usage by the builders.
+func (m *PositionassingmentMutation) UserIDs() (ids []int) {
+	if id := m.user; id != nil {
 		ids = append(ids, *id)
 	}
 	return
 }
 
-// ResetFormdata reset all changes of the "formdata" edge.
-func (m *PositionassingmentMutation) ResetFormdata() {
-	m.formdata = nil
-	m.clearedformdata = false
+// ResetUser reset all changes of the "user" edge.
+func (m *PositionassingmentMutation) ResetUser() {
+	m.user = nil
+	m.cleareduser = false
 }
 
-// SetFormdepartmentID sets the formdepartment edge to Department by id.
-func (m *PositionassingmentMutation) SetFormdepartmentID(id int) {
-	m.formdepartment = &id
+// SetDepartmentID sets the department edge to Department by id.
+func (m *PositionassingmentMutation) SetDepartmentID(id int) {
+	m.department = &id
 }
 
-// ClearFormdepartment clears the formdepartment edge to Department.
-func (m *PositionassingmentMutation) ClearFormdepartment() {
-	m.clearedformdepartment = true
+// ClearDepartment clears the department edge to Department.
+func (m *PositionassingmentMutation) ClearDepartment() {
+	m.cleareddepartment = true
 }
 
-// FormdepartmentCleared returns if the edge formdepartment was cleared.
-func (m *PositionassingmentMutation) FormdepartmentCleared() bool {
-	return m.clearedformdepartment
+// DepartmentCleared returns if the edge department was cleared.
+func (m *PositionassingmentMutation) DepartmentCleared() bool {
+	return m.cleareddepartment
 }
 
-// FormdepartmentID returns the formdepartment id in the mutation.
-func (m *PositionassingmentMutation) FormdepartmentID() (id int, exists bool) {
-	if m.formdepartment != nil {
-		return *m.formdepartment, true
+// DepartmentID returns the department id in the mutation.
+func (m *PositionassingmentMutation) DepartmentID() (id int, exists bool) {
+	if m.department != nil {
+		return *m.department, true
 	}
 	return
 }
 
-// FormdepartmentIDs returns the formdepartment ids in the mutation.
+// DepartmentIDs returns the department ids in the mutation.
 // Note that ids always returns len(ids) <= 1 for unique edges, and you should use
-// FormdepartmentID instead. It exists only for internal usage by the builders.
-func (m *PositionassingmentMutation) FormdepartmentIDs() (ids []int) {
-	if id := m.formdepartment; id != nil {
+// DepartmentID instead. It exists only for internal usage by the builders.
+func (m *PositionassingmentMutation) DepartmentIDs() (ids []int) {
+	if id := m.department; id != nil {
 		ids = append(ids, *id)
 	}
 	return
 }
 
-// ResetFormdepartment reset all changes of the "formdepartment" edge.
-func (m *PositionassingmentMutation) ResetFormdepartment() {
-	m.formdepartment = nil
-	m.clearedformdepartment = false
+// ResetDepartment reset all changes of the "department" edge.
+func (m *PositionassingmentMutation) ResetDepartment() {
+	m.department = nil
+	m.cleareddepartment = false
 }
 
-// SetFormpositionID sets the formposition edge to Position by id.
-func (m *PositionassingmentMutation) SetFormpositionID(id int) {
-	m.formposition = &id
+// SetPositionID sets the position edge to Position by id.
+func (m *PositionassingmentMutation) SetPositionID(id int) {
+	m.position = &id
 }
 
-// ClearFormposition clears the formposition edge to Position.
-func (m *PositionassingmentMutation) ClearFormposition() {
-	m.clearedformposition = true
+// ClearPosition clears the position edge to Position.
+func (m *PositionassingmentMutation) ClearPosition() {
+	m.clearedposition = true
 }
 
-// FormpositionCleared returns if the edge formposition was cleared.
-func (m *PositionassingmentMutation) FormpositionCleared() bool {
-	return m.clearedformposition
+// PositionCleared returns if the edge position was cleared.
+func (m *PositionassingmentMutation) PositionCleared() bool {
+	return m.clearedposition
 }
 
-// FormpositionID returns the formposition id in the mutation.
-func (m *PositionassingmentMutation) FormpositionID() (id int, exists bool) {
-	if m.formposition != nil {
-		return *m.formposition, true
+// PositionID returns the position id in the mutation.
+func (m *PositionassingmentMutation) PositionID() (id int, exists bool) {
+	if m.position != nil {
+		return *m.position, true
 	}
 	return
 }
 
-// FormpositionIDs returns the formposition ids in the mutation.
+// PositionIDs returns the position ids in the mutation.
 // Note that ids always returns len(ids) <= 1 for unique edges, and you should use
-// FormpositionID instead. It exists only for internal usage by the builders.
-func (m *PositionassingmentMutation) FormpositionIDs() (ids []int) {
-	if id := m.formposition; id != nil {
+// PositionID instead. It exists only for internal usage by the builders.
+func (m *PositionassingmentMutation) PositionIDs() (ids []int) {
+	if id := m.position; id != nil {
 		ids = append(ids, *id)
 	}
 	return
 }
 
-// ResetFormposition reset all changes of the "formposition" edge.
-func (m *PositionassingmentMutation) ResetFormposition() {
-	m.formposition = nil
-	m.clearedformposition = false
+// ResetPosition reset all changes of the "position" edge.
+func (m *PositionassingmentMutation) ResetPosition() {
+	m.position = nil
+	m.clearedposition = false
 }
 
 // Op returns the operation name.
@@ -1552,14 +1552,14 @@ func (m *PositionassingmentMutation) ResetField(name string) error {
 // mutation.
 func (m *PositionassingmentMutation) AddedEdges() []string {
 	edges := make([]string, 0, 3)
-	if m.formdata != nil {
-		edges = append(edges, positionassingment.EdgeFormdata)
+	if m.user != nil {
+		edges = append(edges, positionassingment.EdgeUser)
 	}
-	if m.formdepartment != nil {
-		edges = append(edges, positionassingment.EdgeFormdepartment)
+	if m.department != nil {
+		edges = append(edges, positionassingment.EdgeDepartment)
 	}
-	if m.formposition != nil {
-		edges = append(edges, positionassingment.EdgeFormposition)
+	if m.position != nil {
+		edges = append(edges, positionassingment.EdgePosition)
 	}
 	return edges
 }
@@ -1568,16 +1568,16 @@ func (m *PositionassingmentMutation) AddedEdges() []string {
 // the given edge name.
 func (m *PositionassingmentMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case positionassingment.EdgeFormdata:
-		if id := m.formdata; id != nil {
+	case positionassingment.EdgeUser:
+		if id := m.user; id != nil {
 			return []ent.Value{*id}
 		}
-	case positionassingment.EdgeFormdepartment:
-		if id := m.formdepartment; id != nil {
+	case positionassingment.EdgeDepartment:
+		if id := m.department; id != nil {
 			return []ent.Value{*id}
 		}
-	case positionassingment.EdgeFormposition:
-		if id := m.formposition; id != nil {
+	case positionassingment.EdgePosition:
+		if id := m.position; id != nil {
 			return []ent.Value{*id}
 		}
 	}
@@ -1603,14 +1603,14 @@ func (m *PositionassingmentMutation) RemovedIDs(name string) []ent.Value {
 // mutation.
 func (m *PositionassingmentMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 3)
-	if m.clearedformdata {
-		edges = append(edges, positionassingment.EdgeFormdata)
+	if m.cleareduser {
+		edges = append(edges, positionassingment.EdgeUser)
 	}
-	if m.clearedformdepartment {
-		edges = append(edges, positionassingment.EdgeFormdepartment)
+	if m.cleareddepartment {
+		edges = append(edges, positionassingment.EdgeDepartment)
 	}
-	if m.clearedformposition {
-		edges = append(edges, positionassingment.EdgeFormposition)
+	if m.clearedposition {
+		edges = append(edges, positionassingment.EdgePosition)
 	}
 	return edges
 }
@@ -1619,12 +1619,12 @@ func (m *PositionassingmentMutation) ClearedEdges() []string {
 // cleared in this mutation.
 func (m *PositionassingmentMutation) EdgeCleared(name string) bool {
 	switch name {
-	case positionassingment.EdgeFormdata:
-		return m.clearedformdata
-	case positionassingment.EdgeFormdepartment:
-		return m.clearedformdepartment
-	case positionassingment.EdgeFormposition:
-		return m.clearedformposition
+	case positionassingment.EdgeUser:
+		return m.cleareduser
+	case positionassingment.EdgeDepartment:
+		return m.cleareddepartment
+	case positionassingment.EdgePosition:
+		return m.clearedposition
 	}
 	return false
 }
@@ -1633,14 +1633,14 @@ func (m *PositionassingmentMutation) EdgeCleared(name string) bool {
 // error if the edge name is not defined in the schema.
 func (m *PositionassingmentMutation) ClearEdge(name string) error {
 	switch name {
-	case positionassingment.EdgeFormdata:
-		m.ClearFormdata()
+	case positionassingment.EdgeUser:
+		m.ClearUser()
 		return nil
-	case positionassingment.EdgeFormdepartment:
-		m.ClearFormdepartment()
+	case positionassingment.EdgeDepartment:
+		m.ClearDepartment()
 		return nil
-	case positionassingment.EdgeFormposition:
-		m.ClearFormposition()
+	case positionassingment.EdgePosition:
+		m.ClearPosition()
 		return nil
 	}
 	return fmt.Errorf("unknown Positionassingment unique edge %s", name)
@@ -1651,14 +1651,14 @@ func (m *PositionassingmentMutation) ClearEdge(name string) error {
 // defined in the schema.
 func (m *PositionassingmentMutation) ResetEdge(name string) error {
 	switch name {
-	case positionassingment.EdgeFormdata:
-		m.ResetFormdata()
+	case positionassingment.EdgeUser:
+		m.ResetUser()
 		return nil
-	case positionassingment.EdgeFormdepartment:
-		m.ResetFormdepartment()
+	case positionassingment.EdgeDepartment:
+		m.ResetDepartment()
 		return nil
-	case positionassingment.EdgeFormposition:
-		m.ResetFormposition()
+	case positionassingment.EdgePosition:
+		m.ResetPosition()
 		return nil
 	}
 	return fmt.Errorf("unknown Positionassingment edge %s", name)

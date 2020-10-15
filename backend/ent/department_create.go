@@ -26,19 +26,19 @@ func (dc *DepartmentCreate) SetDepartmentname(s string) *DepartmentCreate {
 	return dc
 }
 
-// AddDepartmentIDs adds the department edge to Positionassingment by ids.
-func (dc *DepartmentCreate) AddDepartmentIDs(ids ...int) *DepartmentCreate {
-	dc.mutation.AddDepartmentIDs(ids...)
+// AddFormdepartmentIDs adds the formdepartment edge to Positionassingment by ids.
+func (dc *DepartmentCreate) AddFormdepartmentIDs(ids ...int) *DepartmentCreate {
+	dc.mutation.AddFormdepartmentIDs(ids...)
 	return dc
 }
 
-// AddDepartment adds the department edges to Positionassingment.
-func (dc *DepartmentCreate) AddDepartment(p ...*Positionassingment) *DepartmentCreate {
+// AddFormdepartment adds the formdepartment edges to Positionassingment.
+func (dc *DepartmentCreate) AddFormdepartment(p ...*Positionassingment) *DepartmentCreate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return dc.AddDepartmentIDs(ids...)
+	return dc.AddFormdepartmentIDs(ids...)
 }
 
 // Mutation returns the DepartmentMutation object of the builder.
@@ -119,12 +119,12 @@ func (dc *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 		})
 		d.Departmentname = value
 	}
-	if nodes := dc.mutation.DepartmentIDs(); len(nodes) > 0 {
+	if nodes := dc.mutation.FormdepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   department.DepartmentTable,
-			Columns: []string{department.DepartmentColumn},
+			Table:   department.FormdepartmentTable,
+			Columns: []string{department.FormdepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

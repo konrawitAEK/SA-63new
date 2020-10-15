@@ -10,18 +10,18 @@ const (
 	// FieldDepartmentname holds the string denoting the departmentname field in the database.
 	FieldDepartmentname = "departmentname"
 
-	// EdgeDepartment holds the string denoting the department edge name in mutations.
-	EdgeDepartment = "department"
+	// EdgeFormdepartment holds the string denoting the formdepartment edge name in mutations.
+	EdgeFormdepartment = "formdepartment"
 
 	// Table holds the table name of the department in the database.
 	Table = "departments"
-	// DepartmentTable is the table the holds the department relation/edge.
-	DepartmentTable = "positionassingments"
-	// DepartmentInverseTable is the table name for the Positionassingment entity.
+	// FormdepartmentTable is the table the holds the formdepartment relation/edge.
+	FormdepartmentTable = "positionassingments"
+	// FormdepartmentInverseTable is the table name for the Positionassingment entity.
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
-	DepartmentInverseTable = "positionassingments"
-	// DepartmentColumn is the table column denoting the department relation/edge.
-	DepartmentColumn = "department_department"
+	FormdepartmentInverseTable = "positionassingments"
+	// FormdepartmentColumn is the table column denoting the formdepartment relation/edge.
+	FormdepartmentColumn = "department_formdepartment"
 )
 
 // Columns holds all SQL columns for department fields.

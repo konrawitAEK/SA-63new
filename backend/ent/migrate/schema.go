@@ -49,9 +49,9 @@ var (
 	PositionassingmentsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "day_start", Type: field.TypeTime},
-		{Name: "department_department", Type: field.TypeInt, Nullable: true},
-		{Name: "physician_user", Type: field.TypeInt, Unique: true, Nullable: true},
-		{Name: "position_position", Type: field.TypeInt, Nullable: true},
+		{Name: "department_formdepartment", Type: field.TypeInt, Nullable: true},
+		{Name: "physician_formuser", Type: field.TypeInt, Unique: true, Nullable: true},
+		{Name: "position_formposition", Type: field.TypeInt, Nullable: true},
 	}
 	// PositionassingmentsTable holds the schema information for the "positionassingments" table.
 	PositionassingmentsTable = &schema.Table{
@@ -60,21 +60,21 @@ var (
 		PrimaryKey: []*schema.Column{PositionassingmentsColumns[0]},
 		ForeignKeys: []*schema.ForeignKey{
 			{
-				Symbol:  "positionassingments_departments_department",
+				Symbol:  "positionassingments_departments_formdepartment",
 				Columns: []*schema.Column{PositionassingmentsColumns[2]},
 
 				RefColumns: []*schema.Column{DepartmentsColumns[0]},
 				OnDelete:   schema.SetNull,
 			},
 			{
-				Symbol:  "positionassingments_physicians_user",
+				Symbol:  "positionassingments_physicians_formuser",
 				Columns: []*schema.Column{PositionassingmentsColumns[3]},
 
 				RefColumns: []*schema.Column{PhysiciansColumns[0]},
 				OnDelete:   schema.SetNull,
 			},
 			{
-				Symbol:  "positionassingments_positions_position",
+				Symbol:  "positionassingments_positions_formposition",
 				Columns: []*schema.Column{PositionassingmentsColumns[4]},
 
 				RefColumns: []*schema.Column{PositionsColumns[0]},

@@ -34,19 +34,19 @@ func (pu *PositionUpdate) SetNameposition(s string) *PositionUpdate {
 	return pu
 }
 
-// AddPositionIDs adds the position edge to Positionassingment by ids.
-func (pu *PositionUpdate) AddPositionIDs(ids ...int) *PositionUpdate {
-	pu.mutation.AddPositionIDs(ids...)
+// AddFormpositionIDs adds the formposition edge to Positionassingment by ids.
+func (pu *PositionUpdate) AddFormpositionIDs(ids ...int) *PositionUpdate {
+	pu.mutation.AddFormpositionIDs(ids...)
 	return pu
 }
 
-// AddPosition adds the position edges to Positionassingment.
-func (pu *PositionUpdate) AddPosition(p ...*Positionassingment) *PositionUpdate {
+// AddFormposition adds the formposition edges to Positionassingment.
+func (pu *PositionUpdate) AddFormposition(p ...*Positionassingment) *PositionUpdate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return pu.AddPositionIDs(ids...)
+	return pu.AddFormpositionIDs(ids...)
 }
 
 // Mutation returns the PositionMutation object of the builder.
@@ -54,19 +54,19 @@ func (pu *PositionUpdate) Mutation() *PositionMutation {
 	return pu.mutation
 }
 
-// RemovePositionIDs removes the position edge to Positionassingment by ids.
-func (pu *PositionUpdate) RemovePositionIDs(ids ...int) *PositionUpdate {
-	pu.mutation.RemovePositionIDs(ids...)
+// RemoveFormpositionIDs removes the formposition edge to Positionassingment by ids.
+func (pu *PositionUpdate) RemoveFormpositionIDs(ids ...int) *PositionUpdate {
+	pu.mutation.RemoveFormpositionIDs(ids...)
 	return pu
 }
 
-// RemovePosition removes position edges to Positionassingment.
-func (pu *PositionUpdate) RemovePosition(p ...*Positionassingment) *PositionUpdate {
+// RemoveFormposition removes formposition edges to Positionassingment.
+func (pu *PositionUpdate) RemoveFormposition(p ...*Positionassingment) *PositionUpdate {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return pu.RemovePositionIDs(ids...)
+	return pu.RemoveFormpositionIDs(ids...)
 }
 
 // Save executes the query and returns the number of rows/vertices matched by this operation.
@@ -146,12 +146,12 @@ func (pu *PositionUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: position.FieldNameposition,
 		})
 	}
-	if nodes := pu.mutation.RemovedPositionIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.RemovedFormpositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   position.PositionTable,
-			Columns: []string{position.PositionColumn},
+			Table:   position.FormpositionTable,
+			Columns: []string{position.FormpositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -165,12 +165,12 @@ func (pu *PositionUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := pu.mutation.PositionIDs(); len(nodes) > 0 {
+	if nodes := pu.mutation.FormpositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   position.PositionTable,
-			Columns: []string{position.PositionColumn},
+			Table:   position.FormpositionTable,
+			Columns: []string{position.FormpositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -208,19 +208,19 @@ func (puo *PositionUpdateOne) SetNameposition(s string) *PositionUpdateOne {
 	return puo
 }
 
-// AddPositionIDs adds the position edge to Positionassingment by ids.
-func (puo *PositionUpdateOne) AddPositionIDs(ids ...int) *PositionUpdateOne {
-	puo.mutation.AddPositionIDs(ids...)
+// AddFormpositionIDs adds the formposition edge to Positionassingment by ids.
+func (puo *PositionUpdateOne) AddFormpositionIDs(ids ...int) *PositionUpdateOne {
+	puo.mutation.AddFormpositionIDs(ids...)
 	return puo
 }
 
-// AddPosition adds the position edges to Positionassingment.
-func (puo *PositionUpdateOne) AddPosition(p ...*Positionassingment) *PositionUpdateOne {
+// AddFormposition adds the formposition edges to Positionassingment.
+func (puo *PositionUpdateOne) AddFormposition(p ...*Positionassingment) *PositionUpdateOne {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return puo.AddPositionIDs(ids...)
+	return puo.AddFormpositionIDs(ids...)
 }
 
 // Mutation returns the PositionMutation object of the builder.
@@ -228,19 +228,19 @@ func (puo *PositionUpdateOne) Mutation() *PositionMutation {
 	return puo.mutation
 }
 
-// RemovePositionIDs removes the position edge to Positionassingment by ids.
-func (puo *PositionUpdateOne) RemovePositionIDs(ids ...int) *PositionUpdateOne {
-	puo.mutation.RemovePositionIDs(ids...)
+// RemoveFormpositionIDs removes the formposition edge to Positionassingment by ids.
+func (puo *PositionUpdateOne) RemoveFormpositionIDs(ids ...int) *PositionUpdateOne {
+	puo.mutation.RemoveFormpositionIDs(ids...)
 	return puo
 }
 
-// RemovePosition removes position edges to Positionassingment.
-func (puo *PositionUpdateOne) RemovePosition(p ...*Positionassingment) *PositionUpdateOne {
+// RemoveFormposition removes formposition edges to Positionassingment.
+func (puo *PositionUpdateOne) RemoveFormposition(p ...*Positionassingment) *PositionUpdateOne {
 	ids := make([]int, len(p))
 	for i := range p {
 		ids[i] = p[i].ID
 	}
-	return puo.RemovePositionIDs(ids...)
+	return puo.RemoveFormpositionIDs(ids...)
 }
 
 // Save executes the query and returns the updated entity.
@@ -318,12 +318,12 @@ func (puo *PositionUpdateOne) sqlSave(ctx context.Context) (po *Position, err er
 			Column: position.FieldNameposition,
 		})
 	}
-	if nodes := puo.mutation.RemovedPositionIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.RemovedFormpositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   position.PositionTable,
-			Columns: []string{position.PositionColumn},
+			Table:   position.FormpositionTable,
+			Columns: []string{position.FormpositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -337,12 +337,12 @@ func (puo *PositionUpdateOne) sqlSave(ctx context.Context) (po *Position, err er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := puo.mutation.PositionIDs(); len(nodes) > 0 {
+	if nodes := puo.mutation.FormpositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
-			Table:   position.PositionTable,
-			Columns: []string{position.PositionColumn},
+			Table:   position.FormpositionTable,
+			Columns: []string{position.FormpositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

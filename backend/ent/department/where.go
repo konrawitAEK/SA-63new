@@ -209,25 +209,25 @@ func DepartmentnameContainsFold(v string) predicate.Department {
 	})
 }
 
-// HasDepartment applies the HasEdge predicate on the "department" edge.
-func HasDepartment() predicate.Department {
+// HasFormdepartment applies the HasEdge predicate on the "formdepartment" edge.
+func HasFormdepartment() predicate.Department {
 	return predicate.Department(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(DepartmentTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, DepartmentTable, DepartmentColumn),
+			sqlgraph.To(FormdepartmentTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, FormdepartmentTable, FormdepartmentColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasDepartmentWith applies the HasEdge predicate on the "department" edge with a given conditions (other predicates).
-func HasDepartmentWith(preds ...predicate.Positionassingment) predicate.Department {
+// HasFormdepartmentWith applies the HasEdge predicate on the "formdepartment" edge with a given conditions (other predicates).
+func HasFormdepartmentWith(preds ...predicate.Positionassingment) predicate.Department {
 	return predicate.Department(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(DepartmentInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, DepartmentTable, DepartmentColumn),
+			sqlgraph.To(FormdepartmentInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, FormdepartmentTable, FormdepartmentColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

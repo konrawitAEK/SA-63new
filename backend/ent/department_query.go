@@ -26,7 +26,7 @@ type DepartmentQuery struct {
 	unique     []string
 	predicates []predicate.Department
 	// eager-loading edges.
-	withDepartment *PositionassingmentQuery
+	withFormdepartment *PositionassingmentQuery
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -56,8 +56,8 @@ func (dq *DepartmentQuery) Order(o ...OrderFunc) *DepartmentQuery {
 	return dq
 }
 
-// QueryDepartment chains the current query on the department edge.
-func (dq *DepartmentQuery) QueryDepartment() *PositionassingmentQuery {
+// QueryFormdepartment chains the current query on the formdepartment edge.
+func (dq *DepartmentQuery) QueryFormdepartment() *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: dq.config}
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
 		if err := dq.prepareQuery(ctx); err != nil {
@@ -66,7 +66,7 @@ func (dq *DepartmentQuery) QueryDepartment() *PositionassingmentQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(department.Table, department.FieldID, dq.sqlQuery()),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, department.DepartmentTable, department.DepartmentColumn),
+			sqlgraph.Edge(sqlgraph.O2M, false, department.FormdepartmentTable, department.FormdepartmentColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(dq.driver.Dialect(), step)
 		return fromU, nil
@@ -253,14 +253,14 @@ func (dq *DepartmentQuery) Clone() *DepartmentQuery {
 	}
 }
 
-//  WithDepartment tells the query-builder to eager-loads the nodes that are connected to
-// the "department" edge. The optional arguments used to configure the query builder of the edge.
-func (dq *DepartmentQuery) WithDepartment(opts ...func(*PositionassingmentQuery)) *DepartmentQuery {
+//  WithFormdepartment tells the query-builder to eager-loads the nodes that are connected to
+// the "formdepartment" edge. The optional arguments used to configure the query builder of the edge.
+func (dq *DepartmentQuery) WithFormdepartment(opts ...func(*PositionassingmentQuery)) *DepartmentQuery {
 	query := &PositionassingmentQuery{config: dq.config}
 	for _, opt := range opts {
 		opt(query)
 	}
-	dq.withDepartment = query
+	dq.withFormdepartment = query
 	return dq
 }
 
@@ -331,7 +331,7 @@ func (dq *DepartmentQuery) sqlAll(ctx context.Context) ([]*Department, error) {
 		nodes       = []*Department{}
 		_spec       = dq.querySpec()
 		loadedTypes = [1]bool{
-			dq.withDepartment != nil,
+			dq.withFormdepartment != nil,
 		}
 	)
 	_spec.ScanValues = func() []interface{} {
@@ -355,7 +355,7 @@ func (dq *DepartmentQuery) sqlAll(ctx context.Context) ([]*Department, error) {
 		return nodes, nil
 	}
 
-	if query := dq.withDepartment; query != nil {
+	if query := dq.withFormdepartment; query != nil {
 		fks := make([]driver.Value, 0, len(nodes))
 		nodeids := make(map[int]*Department)
 		for i := range nodes {
@@ -364,22 +364,22 @@ func (dq *DepartmentQuery) sqlAll(ctx context.Context) ([]*Department, error) {
 		}
 		query.withFKs = true
 		query.Where(predicate.Positionassingment(func(s *sql.Selector) {
-			s.Where(sql.InValues(department.DepartmentColumn, fks...))
+			s.Where(sql.InValues(department.FormdepartmentColumn, fks...))
 		}))
 		neighbors, err := query.All(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, n := range neighbors {
-			fk := n.department_department
+			fk := n.department_formdepartment
 			if fk == nil {
-				return nil, fmt.Errorf(`foreign-key "department_department" is nil for node %v`, n.ID)
+				return nil, fmt.Errorf(`foreign-key "department_formdepartment" is nil for node %v`, n.ID)
 			}
 			node, ok := nodeids[*fk]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "department_department" returned %v for node %v`, *fk, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "department_formdepartment" returned %v for node %v`, *fk, n.ID)
 			}
-			node.Edges.Department = append(node.Edges.Department, n)
+			node.Edges.Formdepartment = append(node.Edges.Formdepartment, n)
 		}
 	}
 

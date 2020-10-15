@@ -23,65 +23,65 @@ type Positionassingment struct {
 	DayStart time.Time `json:"DayStart,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the PositionassingmentQuery when eager-loading is set.
-	Edges                 PositionassingmentEdges `json:"edges"`
-	department_department *int
-	physician_user        *int
-	position_position     *int
+	Edges                     PositionassingmentEdges `json:"edges"`
+	department_formdepartment *int
+	physician_formuser        *int
+	position_formposition     *int
 }
 
 // PositionassingmentEdges holds the relations/edges for other nodes in the graph.
 type PositionassingmentEdges struct {
-	// Formdata holds the value of the formdata edge.
-	Formdata *Physician
-	// Formdepartment holds the value of the formdepartment edge.
-	Formdepartment *Department
-	// Formposition holds the value of the formposition edge.
-	Formposition *Position
+	// User holds the value of the user edge.
+	User *Physician
+	// Department holds the value of the department edge.
+	Department *Department
+	// Position holds the value of the position edge.
+	Position *Position
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [3]bool
 }
 
-// FormdataOrErr returns the Formdata value or an error if the edge
+// UserOrErr returns the User value or an error if the edge
 // was not loaded in eager-loading, or loaded but was not found.
-func (e PositionassingmentEdges) FormdataOrErr() (*Physician, error) {
+func (e PositionassingmentEdges) UserOrErr() (*Physician, error) {
 	if e.loadedTypes[0] {
-		if e.Formdata == nil {
-			// The edge formdata was loaded in eager-loading,
+		if e.User == nil {
+			// The edge user was loaded in eager-loading,
 			// but was not found.
 			return nil, &NotFoundError{label: physician.Label}
 		}
-		return e.Formdata, nil
+		return e.User, nil
 	}
-	return nil, &NotLoadedError{edge: "formdata"}
+	return nil, &NotLoadedError{edge: "user"}
 }
 
-// FormdepartmentOrErr returns the Formdepartment value or an error if the edge
+// DepartmentOrErr returns the Department value or an error if the edge
 // was not loaded in eager-loading, or loaded but was not found.
-func (e PositionassingmentEdges) FormdepartmentOrErr() (*Department, error) {
+func (e PositionassingmentEdges) DepartmentOrErr() (*Department, error) {
 	if e.loadedTypes[1] {
-		if e.Formdepartment == nil {
-			// The edge formdepartment was loaded in eager-loading,
+		if e.Department == nil {
+			// The edge department was loaded in eager-loading,
 			// but was not found.
 			return nil, &NotFoundError{label: department.Label}
 		}
-		return e.Formdepartment, nil
+		return e.Department, nil
 	}
-	return nil, &NotLoadedError{edge: "formdepartment"}
+	return nil, &NotLoadedError{edge: "department"}
 }
 
-// FormpositionOrErr returns the Formposition value or an error if the edge
+// PositionOrErr returns the Position value or an error if the edge
 // was not loaded in eager-loading, or loaded but was not found.
-func (e PositionassingmentEdges) FormpositionOrErr() (*Position, error) {
+func (e PositionassingmentEdges) PositionOrErr() (*Position, error) {
 	if e.loadedTypes[2] {
-		if e.Formposition == nil {
-			// The edge formposition was loaded in eager-loading,
+		if e.Position == nil {
+			// The edge position was loaded in eager-loading,
 			// but was not found.
 			return nil, &NotFoundError{label: position.Label}
 		}
-		return e.Formposition, nil
+		return e.Position, nil
 	}
-	return nil, &NotLoadedError{edge: "formposition"}
+	return nil, &NotLoadedError{edge: "position"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -95,9 +95,9 @@ func (*Positionassingment) scanValues() []interface{} {
 // fkValues returns the types for scanning foreign-keys values from sql.Rows.
 func (*Positionassingment) fkValues() []interface{} {
 	return []interface{}{
-		&sql.NullInt64{}, // department_department
-		&sql.NullInt64{}, // physician_user
-		&sql.NullInt64{}, // position_position
+		&sql.NullInt64{}, // department_formdepartment
+		&sql.NullInt64{}, // physician_formuser
+		&sql.NullInt64{}, // position_formposition
 	}
 }
 
@@ -121,40 +121,40 @@ func (po *Positionassingment) assignValues(values ...interface{}) error {
 	values = values[1:]
 	if len(values) == len(positionassingment.ForeignKeys) {
 		if value, ok := values[0].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field department_department", value)
+			return fmt.Errorf("unexpected type %T for edge-field department_formdepartment", value)
 		} else if value.Valid {
-			po.department_department = new(int)
-			*po.department_department = int(value.Int64)
+			po.department_formdepartment = new(int)
+			*po.department_formdepartment = int(value.Int64)
 		}
 		if value, ok := values[1].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field physician_user", value)
+			return fmt.Errorf("unexpected type %T for edge-field physician_formuser", value)
 		} else if value.Valid {
-			po.physician_user = new(int)
-			*po.physician_user = int(value.Int64)
+			po.physician_formuser = new(int)
+			*po.physician_formuser = int(value.Int64)
 		}
 		if value, ok := values[2].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field position_position", value)
+			return fmt.Errorf("unexpected type %T for edge-field position_formposition", value)
 		} else if value.Valid {
-			po.position_position = new(int)
-			*po.position_position = int(value.Int64)
+			po.position_formposition = new(int)
+			*po.position_formposition = int(value.Int64)
 		}
 	}
 	return nil
 }
 
-// QueryFormdata queries the formdata edge of the Positionassingment.
-func (po *Positionassingment) QueryFormdata() *PhysicianQuery {
-	return (&PositionassingmentClient{config: po.config}).QueryFormdata(po)
+// QueryUser queries the user edge of the Positionassingment.
+func (po *Positionassingment) QueryUser() *PhysicianQuery {
+	return (&PositionassingmentClient{config: po.config}).QueryUser(po)
 }
 
-// QueryFormdepartment queries the formdepartment edge of the Positionassingment.
-func (po *Positionassingment) QueryFormdepartment() *DepartmentQuery {
-	return (&PositionassingmentClient{config: po.config}).QueryFormdepartment(po)
+// QueryDepartment queries the department edge of the Positionassingment.
+func (po *Positionassingment) QueryDepartment() *DepartmentQuery {
+	return (&PositionassingmentClient{config: po.config}).QueryDepartment(po)
 }
 
-// QueryFormposition queries the formposition edge of the Positionassingment.
-func (po *Positionassingment) QueryFormposition() *PositionQuery {
-	return (&PositionassingmentClient{config: po.config}).QueryFormposition(po)
+// QueryPosition queries the position edge of the Positionassingment.
+func (po *Positionassingment) QueryPosition() *PositionQuery {
+	return (&PositionassingmentClient{config: po.config}).QueryPosition(po)
 }
 
 // Update returns a builder for updating this Positionassingment.

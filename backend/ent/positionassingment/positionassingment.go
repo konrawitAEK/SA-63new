@@ -10,36 +10,36 @@ const (
 	// FieldDayStart holds the string denoting the daystart field in the database.
 	FieldDayStart = "day_start"
 
-	// EdgeFormdata holds the string denoting the formdata edge name in mutations.
-	EdgeFormdata = "formdata"
-	// EdgeFormdepartment holds the string denoting the formdepartment edge name in mutations.
-	EdgeFormdepartment = "formdepartment"
-	// EdgeFormposition holds the string denoting the formposition edge name in mutations.
-	EdgeFormposition = "formposition"
+	// EdgeUser holds the string denoting the user edge name in mutations.
+	EdgeUser = "user"
+	// EdgeDepartment holds the string denoting the department edge name in mutations.
+	EdgeDepartment = "department"
+	// EdgePosition holds the string denoting the position edge name in mutations.
+	EdgePosition = "position"
 
 	// Table holds the table name of the positionassingment in the database.
 	Table = "positionassingments"
-	// FormdataTable is the table the holds the formdata relation/edge.
-	FormdataTable = "positionassingments"
-	// FormdataInverseTable is the table name for the Physician entity.
+	// UserTable is the table the holds the user relation/edge.
+	UserTable = "positionassingments"
+	// UserInverseTable is the table name for the Physician entity.
 	// It exists in this package in order to avoid circular dependency with the "physician" package.
-	FormdataInverseTable = "physicians"
-	// FormdataColumn is the table column denoting the formdata relation/edge.
-	FormdataColumn = "physician_user"
-	// FormdepartmentTable is the table the holds the formdepartment relation/edge.
-	FormdepartmentTable = "positionassingments"
-	// FormdepartmentInverseTable is the table name for the Department entity.
+	UserInverseTable = "physicians"
+	// UserColumn is the table column denoting the user relation/edge.
+	UserColumn = "physician_formuser"
+	// DepartmentTable is the table the holds the department relation/edge.
+	DepartmentTable = "positionassingments"
+	// DepartmentInverseTable is the table name for the Department entity.
 	// It exists in this package in order to avoid circular dependency with the "department" package.
-	FormdepartmentInverseTable = "departments"
-	// FormdepartmentColumn is the table column denoting the formdepartment relation/edge.
-	FormdepartmentColumn = "department_department"
-	// FormpositionTable is the table the holds the formposition relation/edge.
-	FormpositionTable = "positionassingments"
-	// FormpositionInverseTable is the table name for the Position entity.
+	DepartmentInverseTable = "departments"
+	// DepartmentColumn is the table column denoting the department relation/edge.
+	DepartmentColumn = "department_formdepartment"
+	// PositionTable is the table the holds the position relation/edge.
+	PositionTable = "positionassingments"
+	// PositionInverseTable is the table name for the Position entity.
 	// It exists in this package in order to avoid circular dependency with the "position" package.
-	FormpositionInverseTable = "positions"
-	// FormpositionColumn is the table column denoting the formposition relation/edge.
-	FormpositionColumn = "position_position"
+	PositionInverseTable = "positions"
+	// PositionColumn is the table column denoting the position relation/edge.
+	PositionColumn = "position_formposition"
 )
 
 // Columns holds all SQL columns for positionassingment fields.
@@ -50,7 +50,7 @@ var Columns = []string{
 
 // ForeignKeys holds the SQL foreign-keys that are owned by the Positionassingment type.
 var ForeignKeys = []string{
-	"department_department",
-	"physician_user",
-	"position_position",
+	"department_formdepartment",
+	"physician_formuser",
+	"position_formposition",
 }

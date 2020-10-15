@@ -327,25 +327,25 @@ func EMAILContainsFold(v string) predicate.Physician {
 	})
 }
 
-// HasUser applies the HasEdge predicate on the "user" edge.
-func HasUser() predicate.Physician {
+// HasFormuser applies the HasEdge predicate on the "formuser" edge.
+func HasFormuser() predicate.Physician {
 	return predicate.Physician(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(UserTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, false, UserTable, UserColumn),
+			sqlgraph.To(FormuserTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2O, false, FormuserTable, FormuserColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasUserWith applies the HasEdge predicate on the "user" edge with a given conditions (other predicates).
-func HasUserWith(preds ...predicate.Positionassingment) predicate.Physician {
+// HasFormuserWith applies the HasEdge predicate on the "formuser" edge with a given conditions (other predicates).
+func HasFormuserWith(preds ...predicate.Positionassingment) predicate.Physician {
 	return predicate.Physician(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.To(UserInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, false, UserTable, UserColumn),
+			sqlgraph.To(FormuserInverseTable, FieldID),
+			sqlgraph.Edge(sqlgraph.O2O, false, FormuserTable, FormuserColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

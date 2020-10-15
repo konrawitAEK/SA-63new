@@ -29,61 +29,61 @@ func (pc *PositionassingmentCreate) SetDayStart(t time.Time) *Positionassingment
 	return pc
 }
 
-// SetFormdataID sets the formdata edge to Physician by id.
-func (pc *PositionassingmentCreate) SetFormdataID(id int) *PositionassingmentCreate {
-	pc.mutation.SetFormdataID(id)
+// SetUserID sets the user edge to Physician by id.
+func (pc *PositionassingmentCreate) SetUserID(id int) *PositionassingmentCreate {
+	pc.mutation.SetUserID(id)
 	return pc
 }
 
-// SetNillableFormdataID sets the formdata edge to Physician by id if the given value is not nil.
-func (pc *PositionassingmentCreate) SetNillableFormdataID(id *int) *PositionassingmentCreate {
+// SetNillableUserID sets the user edge to Physician by id if the given value is not nil.
+func (pc *PositionassingmentCreate) SetNillableUserID(id *int) *PositionassingmentCreate {
 	if id != nil {
-		pc = pc.SetFormdataID(*id)
+		pc = pc.SetUserID(*id)
 	}
 	return pc
 }
 
-// SetFormdata sets the formdata edge to Physician.
-func (pc *PositionassingmentCreate) SetFormdata(p *Physician) *PositionassingmentCreate {
-	return pc.SetFormdataID(p.ID)
+// SetUser sets the user edge to Physician.
+func (pc *PositionassingmentCreate) SetUser(p *Physician) *PositionassingmentCreate {
+	return pc.SetUserID(p.ID)
 }
 
-// SetFormdepartmentID sets the formdepartment edge to Department by id.
-func (pc *PositionassingmentCreate) SetFormdepartmentID(id int) *PositionassingmentCreate {
-	pc.mutation.SetFormdepartmentID(id)
+// SetDepartmentID sets the department edge to Department by id.
+func (pc *PositionassingmentCreate) SetDepartmentID(id int) *PositionassingmentCreate {
+	pc.mutation.SetDepartmentID(id)
 	return pc
 }
 
-// SetNillableFormdepartmentID sets the formdepartment edge to Department by id if the given value is not nil.
-func (pc *PositionassingmentCreate) SetNillableFormdepartmentID(id *int) *PositionassingmentCreate {
+// SetNillableDepartmentID sets the department edge to Department by id if the given value is not nil.
+func (pc *PositionassingmentCreate) SetNillableDepartmentID(id *int) *PositionassingmentCreate {
 	if id != nil {
-		pc = pc.SetFormdepartmentID(*id)
+		pc = pc.SetDepartmentID(*id)
 	}
 	return pc
 }
 
-// SetFormdepartment sets the formdepartment edge to Department.
-func (pc *PositionassingmentCreate) SetFormdepartment(d *Department) *PositionassingmentCreate {
-	return pc.SetFormdepartmentID(d.ID)
+// SetDepartment sets the department edge to Department.
+func (pc *PositionassingmentCreate) SetDepartment(d *Department) *PositionassingmentCreate {
+	return pc.SetDepartmentID(d.ID)
 }
 
-// SetFormpositionID sets the formposition edge to Position by id.
-func (pc *PositionassingmentCreate) SetFormpositionID(id int) *PositionassingmentCreate {
-	pc.mutation.SetFormpositionID(id)
+// SetPositionID sets the position edge to Position by id.
+func (pc *PositionassingmentCreate) SetPositionID(id int) *PositionassingmentCreate {
+	pc.mutation.SetPositionID(id)
 	return pc
 }
 
-// SetNillableFormpositionID sets the formposition edge to Position by id if the given value is not nil.
-func (pc *PositionassingmentCreate) SetNillableFormpositionID(id *int) *PositionassingmentCreate {
+// SetNillablePositionID sets the position edge to Position by id if the given value is not nil.
+func (pc *PositionassingmentCreate) SetNillablePositionID(id *int) *PositionassingmentCreate {
 	if id != nil {
-		pc = pc.SetFormpositionID(*id)
+		pc = pc.SetPositionID(*id)
 	}
 	return pc
 }
 
-// SetFormposition sets the formposition edge to Position.
-func (pc *PositionassingmentCreate) SetFormposition(p *Position) *PositionassingmentCreate {
-	return pc.SetFormpositionID(p.ID)
+// SetPosition sets the position edge to Position.
+func (pc *PositionassingmentCreate) SetPosition(p *Position) *PositionassingmentCreate {
+	return pc.SetPositionID(p.ID)
 }
 
 // Mutation returns the PositionassingmentMutation object of the builder.
@@ -164,12 +164,12 @@ func (pc *PositionassingmentCreate) createSpec() (*Positionassingment, *sqlgraph
 		})
 		po.DayStart = value
 	}
-	if nodes := pc.mutation.FormdataIDs(); len(nodes) > 0 {
+	if nodes := pc.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
-			Table:   positionassingment.FormdataTable,
-			Columns: []string{positionassingment.FormdataColumn},
+			Table:   positionassingment.UserTable,
+			Columns: []string{positionassingment.UserColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -183,12 +183,12 @@ func (pc *PositionassingmentCreate) createSpec() (*Positionassingment, *sqlgraph
 		}
 		_spec.Edges = append(_spec.Edges, edge)
 	}
-	if nodes := pc.mutation.FormdepartmentIDs(); len(nodes) > 0 {
+	if nodes := pc.mutation.DepartmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormdepartmentTable,
-			Columns: []string{positionassingment.FormdepartmentColumn},
+			Table:   positionassingment.DepartmentTable,
+			Columns: []string{positionassingment.DepartmentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{
@@ -202,12 +202,12 @@ func (pc *PositionassingmentCreate) createSpec() (*Positionassingment, *sqlgraph
 		}
 		_spec.Edges = append(_spec.Edges, edge)
 	}
-	if nodes := pc.mutation.FormpositionIDs(); len(nodes) > 0 {
+	if nodes := pc.mutation.PositionIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
-			Table:   positionassingment.FormpositionTable,
-			Columns: []string{positionassingment.FormpositionColumn},
+			Table:   positionassingment.PositionTable,
+			Columns: []string{positionassingment.PositionColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: &sqlgraph.FieldSpec{

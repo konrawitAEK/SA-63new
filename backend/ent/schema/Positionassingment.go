@@ -17,15 +17,15 @@ func (Positionassingment ) Fields() []ent.Field {
 
 func (Positionassingment ) Edges() []ent.Edge {
     return []ent.Edge{
-        edge.From("formdata", Physician.Type).
-            Ref("user").
+        edge.From("user", Physician.Type).
+            Ref("formuser").
             Unique(),
 
-        edge.From("formdepartment", Department.Type).
-            Ref("department").
+        edge.From("department", Department.Type).
+            Ref("formdepartment").
             Unique(),
-        edge.From("formposition", Position.Type).
-            Ref("position").
+        edge.From("position", Position.Type).
+            Ref("formposition").
             Unique(),
     }
 }

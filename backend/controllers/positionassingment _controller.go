@@ -3,11 +3,14 @@ import (
    "context"
    "fmt"
    "strconv"
- 
-   "github.com/gin-gonic/gin"
+   "time"
+   
    "github.com/konrawitAEK/app/ent"
    "github.com/konrawitAEK/app/ent/positionassingment"
    "github.com/konrawitAEK/app/ent/physician"
+   "github.com/konrawitAEK/app/ent/department"
+   "github.com/konrawitAEK/app/ent/position"
+   "github.com/gin-gonic/gin"
 ) 
 // PositionassingmentController defines the struct for the positionassingment controller
 type PositionassingmentController struct {
@@ -43,17 +46,57 @@ func (ctl *PositionassingmentController) CreatePositionassingment(c *gin.Context
 	}
   
 	p, err := ctl.client.Physician.
-	Query().
-	Where(physician.IDEQ(int(obj.Physicianid))).
-	Only(context.Background())
+		Query().
+		Where(physician.IDEQ(int(obj.Physicianid))).
+		Only(context.Background())
+
 	if err != nil {
 		c.JSON(400, gin.H{
 			"error": "physician not found",
 		})
 		return
 	}
+
+	d, err := ctl.client.Department.
+		Query().
+		Where(department.IDEQ(int(obj.Departmentid))).
+		Only(context.Background())
+
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "department not found",
+		})
+		return
+	}
+
+	po, err := ctl.client.Position.
+		Query().
+		Where(position.IDEQ(int(obj.Positionid))).
+		Only(context.Background())
+
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "position not found",
+		})
+		return
+	}
+	times, err := time.Parse(time.RFC3339, obj.DayStart)
+
+	pa, err := ctl.client.Positionassingment.
+		Create().
+		SetUser(p).
+		SetPosition(po).
+		SetDepartment(d).
+		SetDayStart(times).
+		Save(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "saving failed",
+		})
+		return
+	}
   
-	c.JSON(200, p)
+	c.JSON(200, pa)
  }
 // GetPositionassingment handles GET requests to retrieve a positionassingment entity
 // @Summary Get a positionassingment entity by ID
@@ -74,7 +117,7 @@ func (ctl *PositionassingmentController) GetPositionassingment(c *gin.Context) {
 		})
 		return
 	}
-	u, err := ctl.client.Positionassingment.
+	pa, err := ctl.client.Positionassingment.
 		Query().
 		Where(positionassingment.IDEQ(int(id))).
 		Only(context.Background())
@@ -84,7 +127,7 @@ func (ctl *PositionassingmentController) GetPositionassingment(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(200, u)
+	c.JSON(200, pa)
  }
  // ListPositionassingment handles request to get a list of positionassingment entities
 // @Summary List positionassingment entities
@@ -112,6 +155,9 @@ func (ctl *PositionassingmentController) ListPositionassingment(c *gin.Context) 
 	}
 	positionassingments, err := ctl.client.Positionassingment.
 		Query().
+		WithUser().
+		WithDepartment().
+		WithPosition().
 		Limit(limit).
 		Offset(offset).
 		All(context.Background())

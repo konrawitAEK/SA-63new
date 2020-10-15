@@ -372,7 +372,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ent.Positionassingment"
+                            "$ref": "#/definitions/controllers.Positionassingment"
                         }
                     },
                     "400": {
@@ -620,13 +620,13 @@ var doc = `{
                 "dayStart": {
                     "type": "string"
                 },
-                "formdata": {
+                "departmentid": {
                     "type": "integer"
                 },
-                "formdepartment": {
+                "physicianid": {
                     "type": "integer"
                 },
-                "formposition": {
+                "positionid": {
                     "type": "integer"
                 }
             }
@@ -652,8 +652,8 @@ var doc = `{
         "ent.DepartmentEdges": {
             "type": "object",
             "properties": {
-                "department": {
-                    "description": "Department holds the value of the department edge.",
+                "formdepartment": {
+                    "description": "Formdepartment holds the value of the formdepartment edge.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ent.Positionassingment"
@@ -686,8 +686,8 @@ var doc = `{
         "ent.PhysicianEdges": {
             "type": "object",
             "properties": {
-                "user": {
-                    "description": "User holds the value of the user edge.",
+                "formuser": {
+                    "description": "Formuser holds the value of the formuser edge.",
                     "type": "object",
                     "$ref": "#/definitions/ent.Positionassingment"
                 }
@@ -714,8 +714,8 @@ var doc = `{
         "ent.PositionEdges": {
             "type": "object",
             "properties": {
-                "position": {
-                    "description": "Position holds the value of the position edge.",
+                "formposition": {
+                    "description": "Formposition holds the value of the formposition edge.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ent.Positionassingment"
@@ -744,20 +744,20 @@ var doc = `{
         "ent.PositionassingmentEdges": {
             "type": "object",
             "properties": {
-                "formdata": {
-                    "description": "Formdata holds the value of the formdata edge.",
-                    "type": "object",
-                    "$ref": "#/definitions/ent.Physician"
-                },
-                "formdepartment": {
-                    "description": "Formdepartment holds the value of the formdepartment edge.",
+                "department": {
+                    "description": "Department holds the value of the department edge.",
                     "type": "object",
                     "$ref": "#/definitions/ent.Department"
                 },
-                "formposition": {
-                    "description": "Formposition holds the value of the formposition edge.",
+                "position": {
+                    "description": "Position holds the value of the position edge.",
                     "type": "object",
                     "$ref": "#/definitions/ent.Position"
+                },
+                "user": {
+                    "description": "User holds the value of the user edge.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Physician"
                 }
             }
         },

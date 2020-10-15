@@ -26,7 +26,7 @@ type PositionQuery struct {
 	unique     []string
 	predicates []predicate.Position
 	// eager-loading edges.
-	withPosition *PositionassingmentQuery
+	withFormposition *PositionassingmentQuery
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -56,8 +56,8 @@ func (pq *PositionQuery) Order(o ...OrderFunc) *PositionQuery {
 	return pq
 }
 
-// QueryPosition chains the current query on the position edge.
-func (pq *PositionQuery) QueryPosition() *PositionassingmentQuery {
+// QueryFormposition chains the current query on the formposition edge.
+func (pq *PositionQuery) QueryFormposition() *PositionassingmentQuery {
 	query := &PositionassingmentQuery{config: pq.config}
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
 		if err := pq.prepareQuery(ctx); err != nil {
@@ -66,7 +66,7 @@ func (pq *PositionQuery) QueryPosition() *PositionassingmentQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(position.Table, position.FieldID, pq.sqlQuery()),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, position.PositionTable, position.PositionColumn),
+			sqlgraph.Edge(sqlgraph.O2M, false, position.FormpositionTable, position.FormpositionColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(pq.driver.Dialect(), step)
 		return fromU, nil
@@ -253,14 +253,14 @@ func (pq *PositionQuery) Clone() *PositionQuery {
 	}
 }
 
-//  WithPosition tells the query-builder to eager-loads the nodes that are connected to
-// the "position" edge. The optional arguments used to configure the query builder of the edge.
-func (pq *PositionQuery) WithPosition(opts ...func(*PositionassingmentQuery)) *PositionQuery {
+//  WithFormposition tells the query-builder to eager-loads the nodes that are connected to
+// the "formposition" edge. The optional arguments used to configure the query builder of the edge.
+func (pq *PositionQuery) WithFormposition(opts ...func(*PositionassingmentQuery)) *PositionQuery {
 	query := &PositionassingmentQuery{config: pq.config}
 	for _, opt := range opts {
 		opt(query)
 	}
-	pq.withPosition = query
+	pq.withFormposition = query
 	return pq
 }
 
@@ -331,7 +331,7 @@ func (pq *PositionQuery) sqlAll(ctx context.Context) ([]*Position, error) {
 		nodes       = []*Position{}
 		_spec       = pq.querySpec()
 		loadedTypes = [1]bool{
-			pq.withPosition != nil,
+			pq.withFormposition != nil,
 		}
 	)
 	_spec.ScanValues = func() []interface{} {
@@ -355,7 +355,7 @@ func (pq *PositionQuery) sqlAll(ctx context.Context) ([]*Position, error) {
 		return nodes, nil
 	}
 
-	if query := pq.withPosition; query != nil {
+	if query := pq.withFormposition; query != nil {
 		fks := make([]driver.Value, 0, len(nodes))
 		nodeids := make(map[int]*Position)
 		for i := range nodes {
@@ -364,22 +364,22 @@ func (pq *PositionQuery) sqlAll(ctx context.Context) ([]*Position, error) {
 		}
 		query.withFKs = true
 		query.Where(predicate.Positionassingment(func(s *sql.Selector) {
-			s.Where(sql.InValues(position.PositionColumn, fks...))
+			s.Where(sql.InValues(position.FormpositionColumn, fks...))
 		}))
 		neighbors, err := query.All(ctx)
 		if err != nil {
 			return nil, err
 		}
 		for _, n := range neighbors {
-			fk := n.position_position
+			fk := n.position_formposition
 			if fk == nil {
-				return nil, fmt.Errorf(`foreign-key "position_position" is nil for node %v`, n.ID)
+				return nil, fmt.Errorf(`foreign-key "position_formposition" is nil for node %v`, n.ID)
 			}
 			node, ok := nodeids[*fk]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "position_position" returned %v for node %v`, *fk, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "position_formposition" returned %v for node %v`, *fk, n.ID)
 			}
-			node.Edges.Position = append(node.Edges.Position, n)
+			node.Edges.Formposition = append(node.Edges.Formposition, n)
 		}
 	}
 

@@ -27,25 +27,25 @@ type Physician struct {
 
 // PhysicianEdges holds the relations/edges for other nodes in the graph.
 type PhysicianEdges struct {
-	// User holds the value of the user edge.
-	User *Positionassingment
+	// Formuser holds the value of the formuser edge.
+	Formuser *Positionassingment
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [1]bool
 }
 
-// UserOrErr returns the User value or an error if the edge
+// FormuserOrErr returns the Formuser value or an error if the edge
 // was not loaded in eager-loading, or loaded but was not found.
-func (e PhysicianEdges) UserOrErr() (*Positionassingment, error) {
+func (e PhysicianEdges) FormuserOrErr() (*Positionassingment, error) {
 	if e.loadedTypes[0] {
-		if e.User == nil {
-			// The edge user was loaded in eager-loading,
+		if e.Formuser == nil {
+			// The edge formuser was loaded in eager-loading,
 			// but was not found.
 			return nil, &NotFoundError{label: positionassingment.Label}
 		}
-		return e.User, nil
+		return e.Formuser, nil
 	}
-	return nil, &NotLoadedError{edge: "user"}
+	return nil, &NotLoadedError{edge: "formuser"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -82,9 +82,9 @@ func (ph *Physician) assignValues(values ...interface{}) error {
 	return nil
 }
 
-// QueryUser queries the user edge of the Physician.
-func (ph *Physician) QueryUser() *PositionassingmentQuery {
-	return (&PhysicianClient{config: ph.config}).QueryUser(ph)
+// QueryFormuser queries the formuser edge of the Physician.
+func (ph *Physician) QueryFormuser() *PositionassingmentQuery {
+	return (&PhysicianClient{config: ph.config}).QueryFormuser(ph)
 }
 
 // Update returns a builder for updating this Physician.
