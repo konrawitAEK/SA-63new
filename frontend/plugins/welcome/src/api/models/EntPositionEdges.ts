@@ -27,11 +27,11 @@ import {
  */
 export interface EntPositionEdges {
     /**
-     * Position holds the value of the position edge.
+     * Formposition holds the value of the formposition edge.
      * @type {Array<EntPositionassingment>}
      * @memberof EntPositionEdges
      */
-    position?: Array<EntPositionassingment>;
+    formposition?: Array<EntPositionassingment>;
 }
 
 export function EntPositionEdgesFromJSON(json: any): EntPositionEdges {
@@ -44,7 +44,7 @@ export function EntPositionEdgesFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'position': !exists(json, 'position') ? undefined : ((json['position'] as Array<any>).map(EntPositionassingmentFromJSON)),
+        'formposition': !exists(json, 'formposition') ? undefined : ((json['formposition'] as Array<any>).map(EntPositionassingmentFromJSON)),
     };
 }
 
@@ -57,7 +57,7 @@ export function EntPositionEdgesToJSON(value?: EntPositionEdges | null): any {
     }
     return {
         
-        'position': value.position === undefined ? undefined : ((value.position as Array<any>).map(EntPositionassingmentToJSON)),
+        'formposition': value.formposition === undefined ? undefined : ((value.formposition as Array<any>).map(EntPositionassingmentToJSON)),
     };
 }
 

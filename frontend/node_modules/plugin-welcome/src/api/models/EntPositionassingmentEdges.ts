@@ -36,22 +36,22 @@ import {
 export interface EntPositionassingmentEdges {
     /**
      * 
-     * @type {EntPhysician}
-     * @memberof EntPositionassingmentEdges
-     */
-    formdata?: EntPhysician;
-    /**
-     * 
      * @type {EntDepartment}
      * @memberof EntPositionassingmentEdges
      */
-    formdepartment?: EntDepartment;
+    department?: EntDepartment;
     /**
      * 
      * @type {EntPosition}
      * @memberof EntPositionassingmentEdges
      */
-    formposition?: EntPosition;
+    position?: EntPosition;
+    /**
+     * 
+     * @type {EntPhysician}
+     * @memberof EntPositionassingmentEdges
+     */
+    user?: EntPhysician;
 }
 
 export function EntPositionassingmentEdgesFromJSON(json: any): EntPositionassingmentEdges {
@@ -64,9 +64,9 @@ export function EntPositionassingmentEdgesFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'formdata': !exists(json, 'formdata') ? undefined : EntPhysicianFromJSON(json['formdata']),
-        'formdepartment': !exists(json, 'formdepartment') ? undefined : EntDepartmentFromJSON(json['formdepartment']),
-        'formposition': !exists(json, 'formposition') ? undefined : EntPositionFromJSON(json['formposition']),
+        'department': !exists(json, 'department') ? undefined : EntDepartmentFromJSON(json['department']),
+        'position': !exists(json, 'position') ? undefined : EntPositionFromJSON(json['position']),
+        'user': !exists(json, 'user') ? undefined : EntPhysicianFromJSON(json['user']),
     };
 }
 
@@ -79,9 +79,9 @@ export function EntPositionassingmentEdgesToJSON(value?: EntPositionassingmentEd
     }
     return {
         
-        'formdata': EntPhysicianToJSON(value.formdata),
-        'formdepartment': EntDepartmentToJSON(value.formdepartment),
-        'formposition': EntPositionToJSON(value.formposition),
+        'department': EntDepartmentToJSON(value.department),
+        'position': EntPositionToJSON(value.position),
+        'user': EntPhysicianToJSON(value.user),
     };
 }
 

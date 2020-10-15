@@ -30,19 +30,19 @@ export interface ControllersPositionassingment {
      * @type {number}
      * @memberof ControllersPositionassingment
      */
-    formdata?: number;
+    departmentid?: number;
     /**
      * 
      * @type {number}
      * @memberof ControllersPositionassingment
      */
-    formdepartment?: number;
+    physicianid?: number;
     /**
      * 
      * @type {number}
      * @memberof ControllersPositionassingment
      */
-    formposition?: number;
+    positionid?: number;
 }
 
 export function ControllersPositionassingmentFromJSON(json: any): ControllersPositionassingment {
@@ -56,9 +56,9 @@ export function ControllersPositionassingmentFromJSONTyped(json: any, ignoreDisc
     return {
         
         'dayStart': !exists(json, 'dayStart') ? undefined : json['dayStart'],
-        'formdata': !exists(json, 'formdata') ? undefined : json['formdata'],
-        'formdepartment': !exists(json, 'formdepartment') ? undefined : json['formdepartment'],
-        'formposition': !exists(json, 'formposition') ? undefined : json['formposition'],
+        'departmentid': !exists(json, 'departmentid') ? undefined : json['departmentid'],
+        'physicianid': !exists(json, 'physicianid') ? undefined : json['physicianid'],
+        'positionid': !exists(json, 'positionid') ? undefined : json['positionid'],
     };
 }
 
@@ -72,9 +72,9 @@ export function ControllersPositionassingmentToJSON(value?: ControllersPositiona
     return {
         
         'dayStart': value.dayStart,
-        'formdata': value.formdata,
-        'formdepartment': value.formdepartment,
-        'formposition': value.formposition,
+        'departmentid': value.departmentid,
+        'physicianid': value.physicianid,
+        'positionid': value.positionid,
     };
 }
 

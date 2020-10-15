@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Content,
@@ -14,7 +14,6 @@ import FormControl from '@material-ui/core/FormControl';
 import { Alert } from '@material-ui/lab';
 import { DefaultApi } from '../../api/apis';
 
-import SaveIcon from '@material-ui/icons/Save';
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -49,70 +48,83 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const initialUserState = {
-  formdata: Number,
-  formdepartment: Number,
-  formposition: Number,
-  DayStart: Date
-};
-
 export default function Create() {
   const classes = useStyles();
   const profile = { givenName: 'to PositionAssingment' };
   const api = new DefaultApi();
 
-  const [Positionassingment, setPositionassingment] = React.useState(initialUserState);
+  //const [Positionassingment, setPositionassingment] = React.useState(initialUserState);
   const [status, setStatus] = useState(false);
   const [alert, setAlert] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [physicians, setPhysicians] = React.useState<EntPhysician[]>([]);
   const [departments, setDepartments] = React.useState<EntDepartment[]>([]);
   const [positions, setPositions] = React.useState<EntPosition[]>([]);
 
-
-  const getPhysician = async () => {
-    const res = await api.listPhysician({ limit: 10, offset: 0 });
-    setPhysicians(res);
-  };
-
-  const getDepartment = async () => {
-    const res = await api.listDepartment({ limit: 10, offset: 0 });
-    setDepartments(res);
-  };
-
-  const getPosition = async () => {
-    const res = await api.listPosition({ limit: 10, offset: 0 });
-    setPositions(res);
-  };
+  const [position, SetPosition] = useState(Number);
+  const [department, SetDepartment] = useState(Number);
+  const [userid, setUser] = useState(Number);
+  const [daystart, SetDayStart] = useState(String);
 
   useEffect(() => {
-    getPhysician();
-    getDepartment();
-    getPosition();
-  }, []);
-
-  // set data to object Positionassingment
-  const handleChange = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>,
-  ) => {
-    const { value } = event.target;
-    setPositionassingment({ ...Positionassingment, [name]: value });
-    console.log(Positionassingment);
-  };
-  function clear() {
-    setPositionassingment({});
-  }
-  // function save data
-  function save() {
-    const apiUrl = 'http://localhost:8080/api/v1/Positionassingment';
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Positionassingment),
+    const getPhysicians = async () => {
+      const p = await api.listPhysician({ limit: 10, offset: 0 });
+      setLoading(false);
+      setPhysicians(p);
     };
+    getPhysicians();
 
-    console.log(Positionassingment); // log ดูข้อมูล สามารถ Inspect ดูข้อมูลได้ F12 เลือก Tab Console
-  }
+    const getDepartments = async () => {
+      const d = await api.listDepartment({ limit: 10, offset: 0 });
+      setLoading(false);
+      setDepartments(d);
+    };
+    getDepartments();
+
+    const getPositions = async () => {
+      const po = await api.listPosition({ limit: 10, offset: 0 });
+      setLoading(false);
+      setPositions(po);
+    };
+    getPositions();
+
+  }, [loading]);
+
+
+  const handletimeChange = (event: any) => {
+    SetDayStart(event.target.value as string);
+  };
+
+  const CreatePositionassingment = async () => {
+    const positionassingment = {
+      physicianid: userid,
+      departmentid: department,
+      positionid: position,
+      dayStart: daystart + "T00:00:00Z"
+    }
+
+    const res: any = await api.createPositionassingment({ positionassingment: positionassingment });
+    setStatus(true);
+    if (res.id != '') {
+      setAlert(true);
+    } else {
+      setAlert(false);
+    }
+  };
+
+
+  const physician_id_handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setUser(event.target.value as number);
+  };
+
+  const department_id_handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    SetDepartment(event.target.value as number);
+  };
+
+  const position_id_handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    SetPosition(event.target.value as number);
+  };
 
   return (
     <Page theme={pageTheme.home}>
@@ -139,6 +151,25 @@ export default function Create() {
       </Header>
       <Content>
 
+        <ContentHeader title="PositionAssingment">
+          <Button variant="outlined" color="secondary" href="#outlined-buttons">
+            LogOut
+        </Button>
+          {status ? (
+            <div>
+              {alert ? (
+                <Alert severity="success">
+                  This is a success alert — check it out!
+                </Alert>
+              ) : (
+                  <Alert severity="warning" style={{ marginTop: 20 }}>
+                    This is a warning alert — check it out!
+                  </Alert>
+                )}
+            </div>
+          ) : null}
+        </ContentHeader>
+
         <div className={classes.root}>
           <form noValidate autoComplete="off">
 
@@ -160,15 +191,17 @@ export default function Create() {
                 variant="outlined"
               >
                 <TextField
-                  id="datetime-local"
+                  id="DayStart"
                   label="DayStart"
-                  type="datetime-local"
-                  defaultValue="2020-09-18T10:30"
+                  type="date"
+                  value={daystart}
+                  onChange={handletimeChange}
+                  //defaultValue="2020-05-24"
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  onChange={handleChange}
+
                 />
               </FormControl>
 
@@ -178,20 +211,17 @@ export default function Create() {
                 className={classes.margin}
                 variant="outlined"
               >
-                <InputLabel>เลือกผู้ใช้ระบบ</InputLabel>
+                <InputLabel id="physician_id-label">Physician</InputLabel>
                 <Select
-                  name="Physician"
-                  value={Positionassingment.formdata || ''}
+                  labelId="physician_id-label"
+                  label="Physician"
+                  id="physician_id"
+                  value={userid}
+                  onChange={physician_id_handleChange}
                   style={{ width: 300 }}
-                  onChange={handleChange}
                 >
-                  {physicians.map(item => {
-                    return (
-                      <MenuItem key={item.id} value={item.id}>
-                        {item.eMAIL}
-                      </MenuItem>
-                    );
-                  })}
+                  {physicians.map((item: EntPhysician) =>
+                    <MenuItem value={item.id}>{item.eMAIL}</MenuItem>)}
                 </Select>
               </FormControl>
 
@@ -200,20 +230,17 @@ export default function Create() {
                 className={classes.margin}
                 variant="outlined"
               >
-                <InputLabel>เลือกแผนก</InputLabel>
+                <InputLabel id="department_id-label">Department</InputLabel>
                 <Select
-                  name="Department"
-                  value={Positionassingment.formdepartment || ''}
+                  labelId="department_id-label"
+                  label="Department"
+                  id="department_id"
+                  value={department}
+                  onChange={department_id_handleChange}
                   style={{ width: 300 }}
-                  onChange={handleChange}
                 >
-                  {departments.map(item => {
-                    return (
-                      <MenuItem key={item.id} value={item.id}>
-                        {item.departmentname}
-                      </MenuItem>
-                    );
-                  })}
+                  {departments.map((item: EntDepartment) =>
+                    <MenuItem value={item.id}>{item.departmentname}</MenuItem>)}
                 </Select>
               </FormControl>
 
@@ -222,35 +249,31 @@ export default function Create() {
                 className={classes.margin}
                 variant="outlined"
               >
-                <InputLabel>เลือกตำแหน่ง</InputLabel>
+                <InputLabel id="position_id-label">Position</InputLabel>
                 <Select
-                  name="Position"
-                  value={Positionassingment.formposition || ''}
-                  onChange={handleChange}
+                  labelId="position_id-label"
+                  label="Position"
+                  id="position_id"
+                  value={position}
+                  onChange={position_id_handleChange}
                   style={{ width: 300 }}
                 >
-                  {positions.map(item => {
-                    return (
-                      <MenuItem key={item.id} value={item.id}>
-                        {item.nameposition}
-                      </MenuItem>
-                    );
-                  })}
+                  {positions.map((item: EntPosition) =>
+                    <MenuItem value={item.id}>{item.nameposition}</MenuItem>)}
                 </Select>
               </FormControl>
             </TableCell>
             <div className={classes.margin}>
               <TableCell align="right">
                 <Button
+                  onClick={() => {
+                    CreatePositionassingment();
+                  }}
                   variant="contained"
                   color="primary"
-                  size="large"
-                  startIcon={<SaveIcon />}
-                  style={{ marginLeft: 632, width: 200 }}
-                  onClick={save}
                 >
                   SAVE DATA
-              </Button>
+             </Button>
               </TableCell>
 
               <TableCell align="right">

@@ -202,7 +202,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * Create positionassingment
      * Create positionassingment
      */
-    async createPositionassingmentRaw(requestParameters: CreatePositionassingmentRequest): Promise<runtime.ApiResponse<EntPositionassingment>> {
+    async createPositionassingmentRaw(requestParameters: CreatePositionassingmentRequest): Promise<runtime.ApiResponse<ControllersPositionassingment>> {
         if (requestParameters.positionassingment === null || requestParameters.positionassingment === undefined) {
             throw new runtime.RequiredError('positionassingment','Required parameter requestParameters.positionassingment was null or undefined when calling createPositionassingment.');
         }
@@ -221,14 +221,14 @@ export class DefaultApi extends runtime.BaseAPI {
             body: ControllersPositionassingmentToJSON(requestParameters.positionassingment),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EntPositionassingmentFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ControllersPositionassingmentFromJSON(jsonValue));
     }
 
     /**
      * Create positionassingment
      * Create positionassingment
      */
-    async createPositionassingment(requestParameters: CreatePositionassingmentRequest): Promise<EntPositionassingment> {
+    async createPositionassingment(requestParameters: CreatePositionassingmentRequest): Promise<ControllersPositionassingment> {
         const response = await this.createPositionassingmentRaw(requestParameters);
         return await response.value();
     }

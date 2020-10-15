@@ -31,7 +31,7 @@ export interface EntPhysicianEdges {
      * @type {EntPositionassingment}
      * @memberof EntPhysicianEdges
      */
-    user?: EntPositionassingment;
+    formuser?: EntPositionassingment;
 }
 
 export function EntPhysicianEdgesFromJSON(json: any): EntPhysicianEdges {
@@ -44,7 +44,7 @@ export function EntPhysicianEdgesFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'user': !exists(json, 'user') ? undefined : EntPositionassingmentFromJSON(json['user']),
+        'formuser': !exists(json, 'formuser') ? undefined : EntPositionassingmentFromJSON(json['formuser']),
     };
 }
 
@@ -57,7 +57,7 @@ export function EntPhysicianEdgesToJSON(value?: EntPhysicianEdges | null): any {
     }
     return {
         
-        'user': EntPositionassingmentToJSON(value.user),
+        'formuser': EntPositionassingmentToJSON(value.formuser),
     };
 }
 

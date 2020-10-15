@@ -27,11 +27,11 @@ import {
  */
 export interface EntDepartmentEdges {
     /**
-     * Department holds the value of the department edge.
+     * Formdepartment holds the value of the formdepartment edge.
      * @type {Array<EntPositionassingment>}
      * @memberof EntDepartmentEdges
      */
-    department?: Array<EntPositionassingment>;
+    formdepartment?: Array<EntPositionassingment>;
 }
 
 export function EntDepartmentEdgesFromJSON(json: any): EntDepartmentEdges {
@@ -44,7 +44,7 @@ export function EntDepartmentEdgesFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'department': !exists(json, 'department') ? undefined : ((json['department'] as Array<any>).map(EntPositionassingmentFromJSON)),
+        'formdepartment': !exists(json, 'formdepartment') ? undefined : ((json['formdepartment'] as Array<any>).map(EntPositionassingmentFromJSON)),
     };
 }
 
@@ -57,7 +57,7 @@ export function EntDepartmentEdgesToJSON(value?: EntDepartmentEdges | null): any
     }
     return {
         
-        'department': value.department === undefined ? undefined : ((value.department as Array<any>).map(EntPositionassingmentToJSON)),
+        'formdepartment': value.formdepartment === undefined ? undefined : ((value.formdepartment as Array<any>).map(EntPositionassingmentToJSON)),
     };
 }
 

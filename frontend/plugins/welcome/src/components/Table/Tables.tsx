@@ -56,9 +56,12 @@ export default function ComponentsTable() {
          : Positionassingments.map(item => (
            <TableRow key={item.id}>
              <TableCell align="center">{item.id}</TableCell>
+             <TableCell align="center">{item.edges?.user?.eMAIL}</TableCell>
+             <TableCell align="center">{item.edges?.position?.nameposition}</TableCell>
+             <TableCell align="center">{item.edges?.department?.departmentname}</TableCell>
              <TableCell align="center">{item.dayStart}</TableCell>
              <TableCell align="center">
-               <Button
+             <Button
                  onClick={() => {
                    deletePositionassingments(item.id);
                  }}
