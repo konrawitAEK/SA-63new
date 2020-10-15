@@ -45,7 +45,7 @@ func (ctl *PositionassingmentController) CreatePositionassingment(c *gin.Context
 		return
 	}
   
-	p, err := ctl.client.Physician.
+	u, err := ctl.client.Physician.
 		Query().
 		Where(physician.IDEQ(int(obj.Physicianid))).
 		Only(context.Background())
@@ -69,7 +69,7 @@ func (ctl *PositionassingmentController) CreatePositionassingment(c *gin.Context
 		return
 	}
 
-	po, err := ctl.client.Position.
+	p, err := ctl.client.Position.
 		Query().
 		Where(position.IDEQ(int(obj.Positionid))).
 		Only(context.Background())
@@ -84,8 +84,8 @@ func (ctl *PositionassingmentController) CreatePositionassingment(c *gin.Context
 
 	pa, err := ctl.client.Positionassingment.
 		Create().
-		SetUser(p).
-		SetPosition(po).
+		SetUser(u).
+		SetPosition(p).
 		SetDepartment(d).
 		SetDayStart(times).
 		Save(context.Background())

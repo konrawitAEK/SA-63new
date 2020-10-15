@@ -69,17 +69,6 @@ export default function Create() {
   const [departments, setDepartments] = React.useState<EntDepartment[]>([]);
   const [positions, setPositions] = React.useState<EntPosition[]>([]);
 
-  //const Toast = Swal.mixin({
-  //  toast: true,
-  //  position: 'top-end',
-  //  showConfirmButton: false,
-  //  timer: 3000,
-  //  timerProgressBar: true,
-  //  didOpen: toast => {
-  //    toast.addEventListener('mouseenter', Swal.stopTimer);
-  //    toast.addEventListener('mouseleave', Swal.resumeTimer);
-  //  },
-  //});
 
   const getPhysician = async () => {
     const res = await api.listPhysician({ limit: 10, offset: 0 });
@@ -123,23 +112,6 @@ export default function Create() {
     };
 
     console.log(Positionassingment); // log ดูข้อมูล สามารถ Inspect ดูข้อมูลได้ F12 เลือก Tab Console
-    fetch(apiUrl, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.status === true) {
-          
-          Toast.fire({
-            icon: 'success',
-            title: 'บันทึกข้อมูลสำเร็จ',
-          });
-        } else {
-          Toast.fire({
-           icon: 'error',
-            title: 'บันทึกข้อมูลไม่สำเร็จ',
-          });
-        }
-      });
   }
 
   return (

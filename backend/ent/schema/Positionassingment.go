@@ -19,13 +19,12 @@ func (Positionassingment ) Edges() []ent.Edge {
     return []ent.Edge{
         edge.From("user", Physician.Type).
             Ref("formuser").
-            Unique(),
-
+			Unique(),
         edge.From("department", Department.Type).
             Ref("formdepartment").
-            Unique(),
+			Unique(),
         edge.From("position", Position.Type).
             Ref("formposition").
-            Unique(),
+			Unique(),
     }
 }
