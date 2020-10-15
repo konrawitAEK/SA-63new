@@ -19,13 +19,13 @@ const WelcomePage: FC<{}> = () => {
    <Page theme={pageTheme.home}>
      <Header
        title={`Welcome ${profile.givenName || 'to Backstage'}`}
-       subtitle="Select the department you want to be in."
+       subtitle="Select the department and position you want to be in."
      ></Header>
      <Content>
        <ContentHeader title="PositionAssingment">
          <Link component={RouterLink} to="/user">
            <Button variant="contained" color="primary">
-             Add User
+             Add Position
            </Button>
          </Link>
        </ContentHeader>

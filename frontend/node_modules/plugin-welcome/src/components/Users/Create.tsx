@@ -15,9 +15,7 @@ import { Alert } from '@material-ui/lab';
 import { DefaultApi } from '../../api/apis';
 
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import TableCell from '@material-ui/core/TableCell';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
@@ -27,7 +25,6 @@ import { EntPhysician } from '../../api/models/EntPhysician';
 import { EntDepartment } from '../../api/models/EntDepartment';
 import { EntPosition } from '../../api/models/EntPosition';
 
-//import Swal from 'sweetalert2';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -176,15 +173,7 @@ export default function Create() {
         <div className={classes.root}>
           <form noValidate autoComplete="off">
 
-            <TableCell align="left">
-              <React.Fragment>
-                <CssBaseline />
-                <Container maxWidth="sm">
-                  <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '50vh', width: '100vh' }} />
-
-                </Container>
-              </React.Fragment>
-            </TableCell>
+            
 
             <TableCell align="left">
 
@@ -192,6 +181,7 @@ export default function Create() {
                 fullWidth
                 className={classes.margin}
                 variant="outlined"
+                style={{ marginLeft: 560, width: 600 }}
               >
                 <TextField
                   id="DayStart"
@@ -213,6 +203,7 @@ export default function Create() {
                 fullWidth
                 className={classes.margin}
                 variant="outlined"
+                style={{ marginLeft: 560, width: 600 }}
               >
                 <InputLabel id="physician_id-label">Physician</InputLabel>
                 <Select
@@ -232,6 +223,7 @@ export default function Create() {
                 fullWidth
                 className={classes.margin}
                 variant="outlined"
+                style={{ marginLeft: 560, width: 600 }}
               >
                 <InputLabel id="department_id-label">Department</InputLabel>
                 <Select
@@ -251,6 +243,7 @@ export default function Create() {
                 fullWidth
                 className={classes.margin}
                 variant="outlined"
+                style={{ marginLeft: 560, width: 600 }}
               >
                 <InputLabel id="position_id-label">Position</InputLabel>
                 <Select
@@ -274,6 +267,7 @@ export default function Create() {
                   }}
                   variant="contained"
                   color="primary"
+                  style={{ marginLeft: 545, width: 200 }}
                 >
                   SAVE DATA
              </Button>
