@@ -20,7 +20,6 @@ func (Physician) Fields() []ent.Field {
  
 func (Physician) Edges() []ent.Edge {
    return []ent.Edge{
-      edge.To("formuser", Positionassingment .Type).
-          Unique(),
+      edge.To("formuser", Positionassingment .Type).StorageKey(edge.Column("PHYSICIAN_ID")),
   }
 }

@@ -8,7 +8,6 @@ import (
 
 	"github.com/facebookincubator/ent/dialect/sql"
 	"github.com/konrawitAEK/app/ent/physician"
-	"github.com/konrawitAEK/app/ent/positionassingment"
 )
 
 // Physician is the model entity for the Physician schema.
@@ -28,21 +27,16 @@ type Physician struct {
 // PhysicianEdges holds the relations/edges for other nodes in the graph.
 type PhysicianEdges struct {
 	// Formuser holds the value of the formuser edge.
-	Formuser *Positionassingment
+	Formuser []*Positionassingment
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [1]bool
 }
 
 // FormuserOrErr returns the Formuser value or an error if the edge
-// was not loaded in eager-loading, or loaded but was not found.
-func (e PhysicianEdges) FormuserOrErr() (*Positionassingment, error) {
+// was not loaded in eager-loading.
+func (e PhysicianEdges) FormuserOrErr() ([]*Positionassingment, error) {
 	if e.loadedTypes[0] {
-		if e.Formuser == nil {
-			// The edge formuser was loaded in eager-loading,
-			// but was not found.
-			return nil, &NotFoundError{label: positionassingment.Label}
-		}
 		return e.Formuser, nil
 	}
 	return nil, &NotLoadedError{edge: "formuser"}

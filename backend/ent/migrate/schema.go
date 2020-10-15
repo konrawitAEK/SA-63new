@@ -49,9 +49,9 @@ var (
 	PositionassingmentsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "day_start", Type: field.TypeTime},
-		{Name: "department_formdepartment", Type: field.TypeInt, Nullable: true},
-		{Name: "physician_formuser", Type: field.TypeInt, Unique: true, Nullable: true},
-		{Name: "position_formposition", Type: field.TypeInt, Nullable: true},
+		{Name: "DEPARTMENT_ID", Type: field.TypeInt, Nullable: true},
+		{Name: "PHYSICIAN_ID", Type: field.TypeInt, Nullable: true},
+		{Name: "POSITION_ID", Type: field.TypeInt, Nullable: true},
 	}
 	// PositionassingmentsTable holds the schema information for the "positionassingments" table.
 	PositionassingmentsTable = &schema.Table{

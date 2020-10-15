@@ -70,7 +70,7 @@ func (pq *PositionassingmentQuery) QueryUser() *PhysicianQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, pq.sqlQuery()),
 			sqlgraph.To(physician.Table, physician.FieldID),
-			sqlgraph.Edge(sqlgraph.O2O, true, positionassingment.UserTable, positionassingment.UserColumn),
+			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.UserTable, positionassingment.UserColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(pq.driver.Dialect(), step)
 		return fromU, nil
@@ -433,7 +433,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		ids := make([]int, 0, len(nodes))
 		nodeids := make(map[int][]*Positionassingment)
 		for i := range nodes {
-			if fk := nodes[i].physician_formuser; fk != nil {
+			if fk := nodes[i].PHYSICIAN_ID; fk != nil {
 				ids = append(ids, *fk)
 				nodeids[*fk] = append(nodeids[*fk], nodes[i])
 			}
@@ -446,7 +446,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		for _, n := range neighbors {
 			nodes, ok := nodeids[n.ID]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "physician_formuser" returned %v`, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "PHYSICIAN_ID" returned %v`, n.ID)
 			}
 			for i := range nodes {
 				nodes[i].Edges.User = n
@@ -458,7 +458,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		ids := make([]int, 0, len(nodes))
 		nodeids := make(map[int][]*Positionassingment)
 		for i := range nodes {
-			if fk := nodes[i].department_formdepartment; fk != nil {
+			if fk := nodes[i].DEPARTMENT_ID; fk != nil {
 				ids = append(ids, *fk)
 				nodeids[*fk] = append(nodeids[*fk], nodes[i])
 			}
@@ -471,7 +471,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		for _, n := range neighbors {
 			nodes, ok := nodeids[n.ID]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "department_formdepartment" returned %v`, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "DEPARTMENT_ID" returned %v`, n.ID)
 			}
 			for i := range nodes {
 				nodes[i].Edges.Department = n
@@ -483,7 +483,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		ids := make([]int, 0, len(nodes))
 		nodeids := make(map[int][]*Positionassingment)
 		for i := range nodes {
-			if fk := nodes[i].position_formposition; fk != nil {
+			if fk := nodes[i].POSITION_ID; fk != nil {
 				ids = append(ids, *fk)
 				nodeids[*fk] = append(nodeids[*fk], nodes[i])
 			}
@@ -496,7 +496,7 @@ func (pq *PositionassingmentQuery) sqlAll(ctx context.Context) ([]*Positionassin
 		for _, n := range neighbors {
 			nodes, ok := nodeids[n.ID]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "position_formposition" returned %v`, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "POSITION_ID" returned %v`, n.ID)
 			}
 			for i := range nodes {
 				nodes[i].Edges.Position = n

@@ -55,9 +55,10 @@ definitions:
   ent.PhysicianEdges:
     properties:
       formuser:
-        $ref: '#/definitions/ent.Positionassingment'
         description: Formuser holds the value of the formuser edge.
-        type: object
+        items:
+          $ref: '#/definitions/ent.Positionassingment'
+        type: array
     type: object
   ent.Position:
     properties:
@@ -87,6 +88,8 @@ definitions:
       DayStart:
         description: DayStart holds the value of the "DayStart" field.
         type: string
+      department_ID:
+        type: integer
       edges:
         $ref: '#/definitions/ent.PositionassingmentEdges'
         description: |-
@@ -95,6 +98,10 @@ definitions:
         type: object
       id:
         description: ID of the ent.
+        type: integer
+      physician_ID:
+        type: integer
+      position_ID:
         type: integer
     type: object
   ent.PositionassingmentEdges:

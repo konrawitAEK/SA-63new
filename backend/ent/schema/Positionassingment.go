@@ -15,7 +15,7 @@ func (Positionassingment ) Fields() []ent.Field {
     }
 }
 
-func (Positionassingment ) Edges() []ent.Edge {
+func (Positionassingment) Edges() []ent.Edge {
     return []ent.Edge{
         edge.From("user", Physician.Type).
             Ref("formuser").

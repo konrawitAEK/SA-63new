@@ -34,6 +34,12 @@ export interface EntPositionassingment {
     dayStart?: string;
     /**
      * 
+     * @type {number}
+     * @memberof EntPositionassingment
+     */
+    departmentID?: number;
+    /**
+     * 
      * @type {EntPositionassingmentEdges}
      * @memberof EntPositionassingment
      */
@@ -44,6 +50,18 @@ export interface EntPositionassingment {
      * @memberof EntPositionassingment
      */
     id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntPositionassingment
+     */
+    physicianID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntPositionassingment
+     */
+    positionID?: number;
 }
 
 export function EntPositionassingmentFromJSON(json: any): EntPositionassingment {
@@ -57,8 +75,11 @@ export function EntPositionassingmentFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'dayStart': !exists(json, 'DayStart') ? undefined : json['DayStart'],
+        'departmentID': !exists(json, 'department_ID') ? undefined : json['department_ID'],
         'edges': !exists(json, 'edges') ? undefined : EntPositionassingmentEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
+        'physicianID': !exists(json, 'physician_ID') ? undefined : json['physician_ID'],
+        'positionID': !exists(json, 'position_ID') ? undefined : json['position_ID'],
     };
 }
 
@@ -72,8 +93,11 @@ export function EntPositionassingmentToJSON(value?: EntPositionassingment | null
     return {
         
         'DayStart': value.dayStart,
+        'department_ID': value.departmentID,
         'edges': EntPositionassingmentEdgesToJSON(value.edges),
         'id': value.id,
+        'physician_ID': value.physicianID,
+        'position_ID': value.positionID,
     };
 }
 

@@ -409,8 +409,8 @@ type PhysicianMutation struct {
 	_NAME           *string
 	_EMAIL          *string
 	clearedFields   map[string]struct{}
-	formuser        *int
-	clearedformuser bool
+	formuser        map[int]struct{}
+	removedformuser map[int]struct{}
 	done            bool
 	oldValue        func(context.Context) (*Physician, error)
 }
@@ -568,35 +568,38 @@ func (m *PhysicianMutation) ResetEMAIL() {
 	m._EMAIL = nil
 }
 
-// SetFormuserID sets the formuser edge to Positionassingment by id.
-func (m *PhysicianMutation) SetFormuserID(id int) {
-	m.formuser = &id
+// AddFormuserIDs adds the formuser edge to Positionassingment by ids.
+func (m *PhysicianMutation) AddFormuserIDs(ids ...int) {
+	if m.formuser == nil {
+		m.formuser = make(map[int]struct{})
+	}
+	for i := range ids {
+		m.formuser[ids[i]] = struct{}{}
+	}
 }
 
-// ClearFormuser clears the formuser edge to Positionassingment.
-func (m *PhysicianMutation) ClearFormuser() {
-	m.clearedformuser = true
+// RemoveFormuserIDs removes the formuser edge to Positionassingment by ids.
+func (m *PhysicianMutation) RemoveFormuserIDs(ids ...int) {
+	if m.removedformuser == nil {
+		m.removedformuser = make(map[int]struct{})
+	}
+	for i := range ids {
+		m.removedformuser[ids[i]] = struct{}{}
+	}
 }
 
-// FormuserCleared returns if the edge formuser was cleared.
-func (m *PhysicianMutation) FormuserCleared() bool {
-	return m.clearedformuser
-}
-
-// FormuserID returns the formuser id in the mutation.
-func (m *PhysicianMutation) FormuserID() (id int, exists bool) {
-	if m.formuser != nil {
-		return *m.formuser, true
+// RemovedFormuser returns the removed ids of formuser.
+func (m *PhysicianMutation) RemovedFormuserIDs() (ids []int) {
+	for id := range m.removedformuser {
+		ids = append(ids, id)
 	}
 	return
 }
 
 // FormuserIDs returns the formuser ids in the mutation.
-// Note that ids always returns len(ids) <= 1 for unique edges, and you should use
-// FormuserID instead. It exists only for internal usage by the builders.
 func (m *PhysicianMutation) FormuserIDs() (ids []int) {
-	if id := m.formuser; id != nil {
-		ids = append(ids, *id)
+	for id := range m.formuser {
+		ids = append(ids, id)
 	}
 	return
 }
@@ -604,7 +607,7 @@ func (m *PhysicianMutation) FormuserIDs() (ids []int) {
 // ResetFormuser reset all changes of the "formuser" edge.
 func (m *PhysicianMutation) ResetFormuser() {
 	m.formuser = nil
-	m.clearedformuser = false
+	m.removedformuser = nil
 }
 
 // Op returns the operation name.
@@ -751,9 +754,11 @@ func (m *PhysicianMutation) AddedEdges() []string {
 func (m *PhysicianMutation) AddedIDs(name string) []ent.Value {
 	switch name {
 	case physician.EdgeFormuser:
-		if id := m.formuser; id != nil {
-			return []ent.Value{*id}
+		ids := make([]ent.Value, 0, len(m.formuser))
+		for id := range m.formuser {
+			ids = append(ids, id)
 		}
+		return ids
 	}
 	return nil
 }
@@ -762,6 +767,9 @@ func (m *PhysicianMutation) AddedIDs(name string) []ent.Value {
 // mutation.
 func (m *PhysicianMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 1)
+	if m.removedformuser != nil {
+		edges = append(edges, physician.EdgeFormuser)
+	}
 	return edges
 }
 
@@ -769,6 +777,12 @@ func (m *PhysicianMutation) RemovedEdges() []string {
 // the given edge name.
 func (m *PhysicianMutation) RemovedIDs(name string) []ent.Value {
 	switch name {
+	case physician.EdgeFormuser:
+		ids := make([]ent.Value, 0, len(m.removedformuser))
+		for id := range m.removedformuser {
+			ids = append(ids, id)
+		}
+		return ids
 	}
 	return nil
 }
@@ -777,9 +791,6 @@ func (m *PhysicianMutation) RemovedIDs(name string) []ent.Value {
 // mutation.
 func (m *PhysicianMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.clearedformuser {
-		edges = append(edges, physician.EdgeFormuser)
-	}
 	return edges
 }
 
@@ -787,8 +798,6 @@ func (m *PhysicianMutation) ClearedEdges() []string {
 // cleared in this mutation.
 func (m *PhysicianMutation) EdgeCleared(name string) bool {
 	switch name {
-	case physician.EdgeFormuser:
-		return m.clearedformuser
 	}
 	return false
 }
@@ -797,9 +806,6 @@ func (m *PhysicianMutation) EdgeCleared(name string) bool {
 // error if the edge name is not defined in the schema.
 func (m *PhysicianMutation) ClearEdge(name string) error {
 	switch name {
-	case physician.EdgeFormuser:
-		m.ClearFormuser()
-		return nil
 	}
 	return fmt.Errorf("unknown Physician unique edge %s", name)
 }

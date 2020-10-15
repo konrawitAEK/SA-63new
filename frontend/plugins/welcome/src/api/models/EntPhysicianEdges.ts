@@ -27,11 +27,11 @@ import {
  */
 export interface EntPhysicianEdges {
     /**
-     * 
-     * @type {EntPositionassingment}
+     * Formuser holds the value of the formuser edge.
+     * @type {Array<EntPositionassingment>}
      * @memberof EntPhysicianEdges
      */
-    formuser?: EntPositionassingment;
+    formuser?: Array<EntPositionassingment>;
 }
 
 export function EntPhysicianEdgesFromJSON(json: any): EntPhysicianEdges {
@@ -44,7 +44,7 @@ export function EntPhysicianEdgesFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'formuser': !exists(json, 'formuser') ? undefined : EntPositionassingmentFromJSON(json['formuser']),
+        'formuser': !exists(json, 'formuser') ? undefined : ((json['formuser'] as Array<any>).map(EntPositionassingmentFromJSON)),
     };
 }
 
@@ -57,7 +57,7 @@ export function EntPhysicianEdgesToJSON(value?: EntPhysicianEdges | null): any {
     }
     return {
         
-        'formuser': EntPositionassingmentToJSON(value.formuser),
+        'formuser': value.formuser === undefined ? undefined : ((value.formuser as Array<any>).map(EntPositionassingmentToJSON)),
     };
 }
 

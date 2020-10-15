@@ -21,7 +21,7 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
 	FormdepartmentInverseTable = "positionassingments"
 	// FormdepartmentColumn is the table column denoting the formdepartment relation/edge.
-	FormdepartmentColumn = "department_formdepartment"
+	FormdepartmentColumn = "DEPARTMENT_ID"
 )
 
 // Columns holds all SQL columns for department fields.

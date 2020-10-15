@@ -22,7 +22,7 @@ const WelcomePage: FC<{}> = () => {
        subtitle="Select the department you want to be in."
      ></Header>
      <Content>
-       <ContentHeader title="Application CRUD">
+       <ContentHeader title="PositionAssingment">
          <Link component={RouterLink} to="/user">
            <Button variant="contained" color="primary">
              Add User

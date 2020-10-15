@@ -25,21 +25,21 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "physician" package.
 	UserInverseTable = "physicians"
 	// UserColumn is the table column denoting the user relation/edge.
-	UserColumn = "physician_formuser"
+	UserColumn = "PHYSICIAN_ID"
 	// DepartmentTable is the table the holds the department relation/edge.
 	DepartmentTable = "positionassingments"
 	// DepartmentInverseTable is the table name for the Department entity.
 	// It exists in this package in order to avoid circular dependency with the "department" package.
 	DepartmentInverseTable = "departments"
 	// DepartmentColumn is the table column denoting the department relation/edge.
-	DepartmentColumn = "department_formdepartment"
+	DepartmentColumn = "DEPARTMENT_ID"
 	// PositionTable is the table the holds the position relation/edge.
 	PositionTable = "positionassingments"
 	// PositionInverseTable is the table name for the Position entity.
 	// It exists in this package in order to avoid circular dependency with the "position" package.
 	PositionInverseTable = "positions"
 	// PositionColumn is the table column denoting the position relation/edge.
-	PositionColumn = "position_formposition"
+	PositionColumn = "POSITION_ID"
 )
 
 // Columns holds all SQL columns for positionassingment fields.
@@ -50,7 +50,7 @@ var Columns = []string{
 
 // ForeignKeys holds the SQL foreign-keys that are owned by the Positionassingment type.
 var ForeignKeys = []string{
-	"department_formdepartment",
-	"physician_formuser",
-	"position_formposition",
+	"DEPARTMENT_ID",
+	"PHYSICIAN_ID",
+	"POSITION_ID",
 }

@@ -111,6 +111,9 @@ export default function Create() {
     } else {
       setAlert(false);
     }
+    const timer = setTimeout(() => {
+      setStatus(false);
+    }, 1000);
   };
 
 

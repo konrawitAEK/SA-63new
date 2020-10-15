@@ -23,10 +23,10 @@ type Positionassingment struct {
 	DayStart time.Time `json:"DayStart,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the PositionassingmentQuery when eager-loading is set.
-	Edges                     PositionassingmentEdges `json:"edges"`
-	department_formdepartment *int
-	physician_formuser        *int
-	position_formposition     *int
+	Edges         PositionassingmentEdges `json:"edges"`
+	DEPARTMENT_ID *int
+	PHYSICIAN_ID  *int
+	POSITION_ID   *int
 }
 
 // PositionassingmentEdges holds the relations/edges for other nodes in the graph.
@@ -95,9 +95,9 @@ func (*Positionassingment) scanValues() []interface{} {
 // fkValues returns the types for scanning foreign-keys values from sql.Rows.
 func (*Positionassingment) fkValues() []interface{} {
 	return []interface{}{
-		&sql.NullInt64{}, // department_formdepartment
-		&sql.NullInt64{}, // physician_formuser
-		&sql.NullInt64{}, // position_formposition
+		&sql.NullInt64{}, // DEPARTMENT_ID
+		&sql.NullInt64{}, // PHYSICIAN_ID
+		&sql.NullInt64{}, // POSITION_ID
 	}
 }
 
@@ -121,22 +121,22 @@ func (po *Positionassingment) assignValues(values ...interface{}) error {
 	values = values[1:]
 	if len(values) == len(positionassingment.ForeignKeys) {
 		if value, ok := values[0].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field department_formdepartment", value)
+			return fmt.Errorf("unexpected type %T for edge-field DEPARTMENT_ID", value)
 		} else if value.Valid {
-			po.department_formdepartment = new(int)
-			*po.department_formdepartment = int(value.Int64)
+			po.DEPARTMENT_ID = new(int)
+			*po.DEPARTMENT_ID = int(value.Int64)
 		}
 		if value, ok := values[1].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field physician_formuser", value)
+			return fmt.Errorf("unexpected type %T for edge-field PHYSICIAN_ID", value)
 		} else if value.Valid {
-			po.physician_formuser = new(int)
-			*po.physician_formuser = int(value.Int64)
+			po.PHYSICIAN_ID = new(int)
+			*po.PHYSICIAN_ID = int(value.Int64)
 		}
 		if value, ok := values[2].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field position_formposition", value)
+			return fmt.Errorf("unexpected type %T for edge-field POSITION_ID", value)
 		} else if value.Valid {
-			po.position_formposition = new(int)
-			*po.position_formposition = int(value.Int64)
+			po.POSITION_ID = new(int)
+			*po.POSITION_ID = int(value.Int64)
 		}
 	}
 	return nil

@@ -21,7 +21,7 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
 	FormpositionInverseTable = "positionassingments"
 	// FormpositionColumn is the table column denoting the formposition relation/edge.
-	FormpositionColumn = "position_formposition"
+	FormpositionColumn = "POSITION_ID"
 )
 
 // Columns holds all SQL columns for position fields.

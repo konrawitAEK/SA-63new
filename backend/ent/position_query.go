@@ -371,13 +371,13 @@ func (pq *PositionQuery) sqlAll(ctx context.Context) ([]*Position, error) {
 			return nil, err
 		}
 		for _, n := range neighbors {
-			fk := n.position_formposition
+			fk := n.POSITION_ID
 			if fk == nil {
-				return nil, fmt.Errorf(`foreign-key "position_formposition" is nil for node %v`, n.ID)
+				return nil, fmt.Errorf(`foreign-key "POSITION_ID" is nil for node %v`, n.ID)
 			}
 			node, ok := nodeids[*fk]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "position_formposition" returned %v for node %v`, *fk, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "POSITION_ID" returned %v for node %v`, *fk, n.ID)
 			}
 			node.Edges.Formposition = append(node.Edges.Formposition, n)
 		}

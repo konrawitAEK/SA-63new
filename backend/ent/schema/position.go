@@ -17,6 +17,6 @@ func (Position) Fields() []ent.Field {
 
 func (Position) Edges() []ent.Edge {
     return []ent.Edge{
-        edge.To("formposition", Positionassingment .Type),
+        edge.To("formposition", Positionassingment .Type).StorageKey(edge.Column("POSITION_ID")),
     }
 }

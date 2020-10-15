@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import { DefaultApi } from '../../api/apis';
 import { EntPositionassingment } from '../../api/models/EntPositionassingment';
 
+
 const useStyles = makeStyles({
  table: {
    minWidth: 650,
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 export default function ComponentsTable() {
  const classes = useStyles();
  const api = new DefaultApi();
- const [Positionassingments, setPositionassingments] = useState<EntPositionassingment[]>();
+ const [Positionassingments, setPositionassingments] = useState<EntPositionassingment[]>(Array);
  const [loading, setLoading] = useState(true);
  
  useEffect(() => {
@@ -37,6 +38,7 @@ export default function ComponentsTable() {
       setLoading(true);
  };
  
+ 
  return (
    <TableContainer component={Paper}>
      <Table className={classes.table} aria-label="simple table">
@@ -51,9 +53,7 @@ export default function ComponentsTable() {
          </TableRow>
        </TableHead>
        <TableBody>
-         {Positionassingments === undefined
-         ? null
-         : Positionassingments.map(item => (
+         {Positionassingments.map((item:any) => (
            <TableRow key={item.id}>
              <TableCell align="center">{item.id}</TableCell>
              <TableCell align="center">{item.edges?.user?.eMAIL}</TableCell>

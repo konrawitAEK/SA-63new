@@ -371,13 +371,13 @@ func (dq *DepartmentQuery) sqlAll(ctx context.Context) ([]*Department, error) {
 			return nil, err
 		}
 		for _, n := range neighbors {
-			fk := n.department_formdepartment
+			fk := n.DEPARTMENT_ID
 			if fk == nil {
-				return nil, fmt.Errorf(`foreign-key "department_formdepartment" is nil for node %v`, n.ID)
+				return nil, fmt.Errorf(`foreign-key "DEPARTMENT_ID" is nil for node %v`, n.ID)
 			}
 			node, ok := nodeids[*fk]
 			if !ok {
-				return nil, fmt.Errorf(`unexpected foreign-key "department_formdepartment" returned %v for node %v`, *fk, n.ID)
+				return nil, fmt.Errorf(`unexpected foreign-key "DEPARTMENT_ID" returned %v for node %v`, *fk, n.ID)
 			}
 			node.Edges.Formdepartment = append(node.Edges.Formdepartment, n)
 		}

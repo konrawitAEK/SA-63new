@@ -688,8 +688,10 @@ var doc = `{
             "properties": {
                 "formuser": {
                     "description": "Formuser holds the value of the formuser edge.",
-                    "type": "object",
-                    "$ref": "#/definitions/ent.Positionassingment"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ent.Positionassingment"
+                    }
                 }
             }
         },
@@ -730,6 +732,9 @@ var doc = `{
                     "description": "DayStart holds the value of the \"DayStart\" field.",
                     "type": "string"
                 },
+                "department_ID": {
+                    "type": "integer"
+                },
                 "edges": {
                     "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the PositionassingmentQuery when eager-loading is set.",
                     "type": "object",
@@ -737,6 +742,12 @@ var doc = `{
                 },
                 "id": {
                     "description": "ID of the ent.",
+                    "type": "integer"
+                },
+                "physician_ID": {
+                    "type": "integer"
+                },
+                "position_ID": {
                     "type": "integer"
                 }
             }

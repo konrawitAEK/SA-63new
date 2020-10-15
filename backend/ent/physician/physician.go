@@ -23,7 +23,7 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "positionassingment" package.
 	FormuserInverseTable = "positionassingments"
 	// FormuserColumn is the table column denoting the formuser relation/edge.
-	FormuserColumn = "physician_formuser"
+	FormuserColumn = "PHYSICIAN_ID"
 )
 
 // Columns holds all SQL columns for physician fields.

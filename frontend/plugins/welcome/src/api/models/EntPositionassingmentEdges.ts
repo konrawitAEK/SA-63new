@@ -64,9 +64,9 @@ export function EntPositionassingmentEdgesFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'department': !exists(json, 'department') ? undefined : EntDepartmentFromJSON(json['department']),
-        'position': !exists(json, 'position') ? undefined : EntPositionFromJSON(json['position']),
-        'user': !exists(json, 'user') ? undefined : EntPhysicianFromJSON(json['user']),
+        'department': !exists(json, 'Department') ? undefined : EntDepartmentFromJSON(json['Department']),
+        'position': !exists(json, 'Position') ? undefined : EntPositionFromJSON(json['Position']),
+        'user': !exists(json, 'User') ? undefined : EntPhysicianFromJSON(json['User']),
     };
 }
 
