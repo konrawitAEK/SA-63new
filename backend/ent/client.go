@@ -323,7 +323,7 @@ func (c *PhysicianClient) QueryFormuser(ph *Physician) *PositionassingmentQuery 
 		step := sqlgraph.NewStep(
 			sqlgraph.From(physician.Table, physician.FieldID, id),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, physician.FormuserTable, physician.FormuserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, physician.FormuserTable, physician.FormuserColumn),
 		)
 		fromV = sqlgraph.Neighbors(ph.driver.Dialect(), step)
 		return fromV, nil
@@ -521,7 +521,7 @@ func (c *PositionassingmentClient) QueryUser(po *Positionassingment) *PhysicianQ
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, id),
 			sqlgraph.To(physician.Table, physician.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.UserTable, positionassingment.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, true, positionassingment.UserTable, positionassingment.UserColumn),
 		)
 		fromV = sqlgraph.Neighbors(po.driver.Dialect(), step)
 		return fromV, nil

@@ -66,7 +66,7 @@ func (pq *PhysicianQuery) QueryFormuser() *PositionassingmentQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(physician.Table, physician.FieldID, pq.sqlQuery()),
 			sqlgraph.To(positionassingment.Table, positionassingment.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, physician.FormuserTable, physician.FormuserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, physician.FormuserTable, physician.FormuserColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(pq.driver.Dialect(), step)
 		return fromU, nil
@@ -379,7 +379,7 @@ func (pq *PhysicianQuery) sqlAll(ctx context.Context) ([]*Physician, error) {
 			if !ok {
 				return nil, fmt.Errorf(`unexpected foreign-key "PHYSICIAN_ID" returned %v for node %v`, *fk, n.ID)
 			}
-			node.Edges.Formuser = append(node.Edges.Formuser, n)
+			node.Edges.Formuser = n
 		}
 	}
 

@@ -102,6 +102,9 @@ func main() {
    physicians := Physicians{
     Physician: []Physician{
                 Physician{"Dang Dang","Dang@gmail.com"},
+                Physician{"AEK Dang","AEK@gmail.com"},
+                Physician{"PANG Dang","PANG@gmail.com"},
+                Physician{"NW Dang","NW@gmail.com"},
         },
    }
 

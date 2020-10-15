@@ -40,19 +40,23 @@ func (pu *PhysicianUpdate) SetEMAIL(s string) *PhysicianUpdate {
 	return pu
 }
 
-// AddFormuserIDs adds the formuser edge to Positionassingment by ids.
-func (pu *PhysicianUpdate) AddFormuserIDs(ids ...int) *PhysicianUpdate {
-	pu.mutation.AddFormuserIDs(ids...)
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (pu *PhysicianUpdate) SetFormuserID(id int) *PhysicianUpdate {
+	pu.mutation.SetFormuserID(id)
 	return pu
 }
 
-// AddFormuser adds the formuser edges to Positionassingment.
-func (pu *PhysicianUpdate) AddFormuser(p ...*Positionassingment) *PhysicianUpdate {
-	ids := make([]int, len(p))
-	for i := range p {
-		ids[i] = p[i].ID
+// SetNillableFormuserID sets the formuser edge to Positionassingment by id if the given value is not nil.
+func (pu *PhysicianUpdate) SetNillableFormuserID(id *int) *PhysicianUpdate {
+	if id != nil {
+		pu = pu.SetFormuserID(*id)
 	}
-	return pu.AddFormuserIDs(ids...)
+	return pu
+}
+
+// SetFormuser sets the formuser edge to Positionassingment.
+func (pu *PhysicianUpdate) SetFormuser(p *Positionassingment) *PhysicianUpdate {
+	return pu.SetFormuserID(p.ID)
 }
 
 // Mutation returns the PhysicianMutation object of the builder.
@@ -60,19 +64,10 @@ func (pu *PhysicianUpdate) Mutation() *PhysicianMutation {
 	return pu.mutation
 }
 
-// RemoveFormuserIDs removes the formuser edge to Positionassingment by ids.
-func (pu *PhysicianUpdate) RemoveFormuserIDs(ids ...int) *PhysicianUpdate {
-	pu.mutation.RemoveFormuserIDs(ids...)
+// ClearFormuser clears the formuser edge to Positionassingment.
+func (pu *PhysicianUpdate) ClearFormuser() *PhysicianUpdate {
+	pu.mutation.ClearFormuser()
 	return pu
-}
-
-// RemoveFormuser removes formuser edges to Positionassingment.
-func (pu *PhysicianUpdate) RemoveFormuser(p ...*Positionassingment) *PhysicianUpdate {
-	ids := make([]int, len(p))
-	for i := range p {
-		ids[i] = p[i].ID
-	}
-	return pu.RemoveFormuserIDs(ids...)
 }
 
 // Save executes the query and returns the number of rows/vertices matched by this operation.
@@ -159,9 +154,9 @@ func (pu *PhysicianUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: physician.FieldEMAIL,
 		})
 	}
-	if nodes := pu.mutation.RemovedFormuserIDs(); len(nodes) > 0 {
+	if pu.mutation.FormuserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   physician.FormuserTable,
 			Columns: []string{physician.FormuserColumn},
@@ -173,14 +168,11 @@ func (pu *PhysicianUpdate) sqlSave(ctx context.Context) (n int, err error) {
 				},
 			},
 		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
 	if nodes := pu.mutation.FormuserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   physician.FormuserTable,
 			Columns: []string{physician.FormuserColumn},
@@ -227,19 +219,23 @@ func (puo *PhysicianUpdateOne) SetEMAIL(s string) *PhysicianUpdateOne {
 	return puo
 }
 
-// AddFormuserIDs adds the formuser edge to Positionassingment by ids.
-func (puo *PhysicianUpdateOne) AddFormuserIDs(ids ...int) *PhysicianUpdateOne {
-	puo.mutation.AddFormuserIDs(ids...)
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (puo *PhysicianUpdateOne) SetFormuserID(id int) *PhysicianUpdateOne {
+	puo.mutation.SetFormuserID(id)
 	return puo
 }
 
-// AddFormuser adds the formuser edges to Positionassingment.
-func (puo *PhysicianUpdateOne) AddFormuser(p ...*Positionassingment) *PhysicianUpdateOne {
-	ids := make([]int, len(p))
-	for i := range p {
-		ids[i] = p[i].ID
+// SetNillableFormuserID sets the formuser edge to Positionassingment by id if the given value is not nil.
+func (puo *PhysicianUpdateOne) SetNillableFormuserID(id *int) *PhysicianUpdateOne {
+	if id != nil {
+		puo = puo.SetFormuserID(*id)
 	}
-	return puo.AddFormuserIDs(ids...)
+	return puo
+}
+
+// SetFormuser sets the formuser edge to Positionassingment.
+func (puo *PhysicianUpdateOne) SetFormuser(p *Positionassingment) *PhysicianUpdateOne {
+	return puo.SetFormuserID(p.ID)
 }
 
 // Mutation returns the PhysicianMutation object of the builder.
@@ -247,19 +243,10 @@ func (puo *PhysicianUpdateOne) Mutation() *PhysicianMutation {
 	return puo.mutation
 }
 
-// RemoveFormuserIDs removes the formuser edge to Positionassingment by ids.
-func (puo *PhysicianUpdateOne) RemoveFormuserIDs(ids ...int) *PhysicianUpdateOne {
-	puo.mutation.RemoveFormuserIDs(ids...)
+// ClearFormuser clears the formuser edge to Positionassingment.
+func (puo *PhysicianUpdateOne) ClearFormuser() *PhysicianUpdateOne {
+	puo.mutation.ClearFormuser()
 	return puo
-}
-
-// RemoveFormuser removes formuser edges to Positionassingment.
-func (puo *PhysicianUpdateOne) RemoveFormuser(p ...*Positionassingment) *PhysicianUpdateOne {
-	ids := make([]int, len(p))
-	for i := range p {
-		ids[i] = p[i].ID
-	}
-	return puo.RemoveFormuserIDs(ids...)
 }
 
 // Save executes the query and returns the updated entity.
@@ -344,9 +331,9 @@ func (puo *PhysicianUpdateOne) sqlSave(ctx context.Context) (ph *Physician, err 
 			Column: physician.FieldEMAIL,
 		})
 	}
-	if nodes := puo.mutation.RemovedFormuserIDs(); len(nodes) > 0 {
+	if puo.mutation.FormuserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   physician.FormuserTable,
 			Columns: []string{physician.FormuserColumn},
@@ -358,14 +345,11 @@ func (puo *PhysicianUpdateOne) sqlSave(ctx context.Context) (ph *Physician, err 
 				},
 			},
 		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
 	if nodes := puo.mutation.FormuserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   physician.FormuserTable,
 			Columns: []string{physician.FormuserColumn},

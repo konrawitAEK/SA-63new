@@ -673,10 +673,8 @@
             "properties": {
                 "formuser": {
                     "description": "Formuser holds the value of the formuser edge.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ent.Positionassingment"
-                    }
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Positionassingment"
                 }
             }
         },

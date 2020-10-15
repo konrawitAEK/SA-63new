@@ -70,7 +70,7 @@ func (pq *PositionassingmentQuery) QueryUser() *PhysicianQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(positionassingment.Table, positionassingment.FieldID, pq.sqlQuery()),
 			sqlgraph.To(physician.Table, physician.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, positionassingment.UserTable, positionassingment.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, true, positionassingment.UserTable, positionassingment.UserColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(pq.driver.Dialect(), step)
 		return fromU, nil

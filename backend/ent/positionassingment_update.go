@@ -196,7 +196,7 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 	}
 	if pu.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   positionassingment.UserTable,
 			Columns: []string{positionassingment.UserColumn},
@@ -212,7 +212,7 @@ func (pu *PositionassingmentUpdate) sqlSave(ctx context.Context) (n int, err err
 	}
 	if nodes := pu.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   positionassingment.UserTable,
 			Columns: []string{positionassingment.UserColumn},
@@ -480,7 +480,7 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 	}
 	if puo.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   positionassingment.UserTable,
 			Columns: []string{positionassingment.UserColumn},
@@ -496,7 +496,7 @@ func (puo *PositionassingmentUpdateOne) sqlSave(ctx context.Context) (po *Positi
 	}
 	if nodes := puo.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   positionassingment.UserTable,
 			Columns: []string{positionassingment.UserColumn},

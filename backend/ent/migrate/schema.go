@@ -50,7 +50,7 @@ var (
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "day_start", Type: field.TypeTime},
 		{Name: "DEPARTMENT_ID", Type: field.TypeInt, Nullable: true},
-		{Name: "PHYSICIAN_ID", Type: field.TypeInt, Nullable: true},
+		{Name: "PHYSICIAN_ID", Type: field.TypeInt, Unique: true, Nullable: true},
 		{Name: "POSITION_ID", Type: field.TypeInt, Nullable: true},
 	}
 	// PositionassingmentsTable holds the schema information for the "positionassingments" table.

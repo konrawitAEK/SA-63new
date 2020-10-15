@@ -333,7 +333,7 @@ func HasFormuser() predicate.Physician {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
 			sqlgraph.To(FormuserTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, FormuserTable, FormuserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, FormuserTable, FormuserColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
@@ -345,7 +345,7 @@ func HasFormuserWith(preds ...predicate.Positionassingment) predicate.Physician 
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
 			sqlgraph.To(FormuserInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, FormuserTable, FormuserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, FormuserTable, FormuserColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

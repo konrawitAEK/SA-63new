@@ -32,19 +32,23 @@ func (pc *PhysicianCreate) SetEMAIL(s string) *PhysicianCreate {
 	return pc
 }
 
-// AddFormuserIDs adds the formuser edge to Positionassingment by ids.
-func (pc *PhysicianCreate) AddFormuserIDs(ids ...int) *PhysicianCreate {
-	pc.mutation.AddFormuserIDs(ids...)
+// SetFormuserID sets the formuser edge to Positionassingment by id.
+func (pc *PhysicianCreate) SetFormuserID(id int) *PhysicianCreate {
+	pc.mutation.SetFormuserID(id)
 	return pc
 }
 
-// AddFormuser adds the formuser edges to Positionassingment.
-func (pc *PhysicianCreate) AddFormuser(p ...*Positionassingment) *PhysicianCreate {
-	ids := make([]int, len(p))
-	for i := range p {
-		ids[i] = p[i].ID
+// SetNillableFormuserID sets the formuser edge to Positionassingment by id if the given value is not nil.
+func (pc *PhysicianCreate) SetNillableFormuserID(id *int) *PhysicianCreate {
+	if id != nil {
+		pc = pc.SetFormuserID(*id)
 	}
-	return pc.AddFormuserIDs(ids...)
+	return pc
+}
+
+// SetFormuser sets the formuser edge to Positionassingment.
+func (pc *PhysicianCreate) SetFormuser(p *Positionassingment) *PhysicianCreate {
+	return pc.SetFormuserID(p.ID)
 }
 
 // Mutation returns the PhysicianMutation object of the builder.
@@ -138,7 +142,7 @@ func (pc *PhysicianCreate) createSpec() (*Physician, *sqlgraph.CreateSpec) {
 	}
 	if nodes := pc.mutation.FormuserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   physician.FormuserTable,
 			Columns: []string{physician.FormuserColumn},

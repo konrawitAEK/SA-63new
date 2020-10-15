@@ -166,7 +166,7 @@ func (pc *PositionassingmentCreate) createSpec() (*Positionassingment, *sqlgraph
 	}
 	if nodes := pc.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   positionassingment.UserTable,
 			Columns: []string{positionassingment.UserColumn},
