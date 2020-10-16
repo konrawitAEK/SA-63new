@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import ComponanceTable from '../Table';
 import Button from '@material-ui/core/Button';
- 
 import {
  Content,
  Header,
@@ -34,5 +33,4 @@ const WelcomePage: FC<{}> = () => {
    </Page>
  );
 };
- 
 export default WelcomePage;

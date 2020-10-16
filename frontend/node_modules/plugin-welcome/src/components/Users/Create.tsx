@@ -13,18 +13,14 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import { Alert } from '@material-ui/lab';
 import { DefaultApi } from '../../api/apis';
-
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import TableCell from '@material-ui/core/TableCell';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-
 import { EntPhysician } from '../../api/models/EntPhysician';
 import { EntDepartment } from '../../api/models/EntDepartment';
 import { EntPosition } from '../../api/models/EntPosition';
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -137,15 +133,6 @@ export default function Create() {
         <Typography component="div" variant="body1">
           <Box color="Dang@gmail.com">Dang@gmail.com</Box>
           <Box color="secondary.main"></Box>
-          <Link
-            component="button"
-            variant="body2"
-            onClick={() => {
-              console.info("I'm a button.");
-            }}
-          >
-            Logout
-    </Link>
         </Typography>
 
       </Header>
@@ -173,7 +160,7 @@ export default function Create() {
         <div className={classes.root}>
           <form noValidate autoComplete="off">
 
-            
+
 
             <TableCell align="left">
 
@@ -194,7 +181,6 @@ export default function Create() {
                   InputLabelProps={{
                     shrink: true,
                   }}
-
                 />
               </FormControl>
 
@@ -272,7 +258,6 @@ export default function Create() {
                   SAVE DATA
              </Button>
               </TableCell>
-
               <TableCell align="right">
                 <Button
                   style={{ marginLeft: 1 }}
@@ -283,12 +268,10 @@ export default function Create() {
                   Back
              </Button>
               </TableCell>
-
             </div>
           </form>
         </div>
       </Content>
-
     </Page>
   );
 }
