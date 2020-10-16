@@ -138,10 +138,7 @@ export default function Create() {
       </Header>
       <Content>
 
-        <ContentHeader title="PositionAssingment">
-          <Button variant="outlined" color="secondary" href="#outlined-buttons">
-            LogOut
-        </Button>
+        <ContentHeader title="PositionAssingment">          
           {status ? (
             <div>
               {alert ? (
@@ -262,7 +259,7 @@ export default function Create() {
                 <Button
                   style={{ marginLeft: 1 }}
                   component={RouterLink}
-                  to="/"
+                  to="/login"
                   variant="contained"
                 >
                   Back
