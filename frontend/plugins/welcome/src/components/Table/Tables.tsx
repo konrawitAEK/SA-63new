@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { DefaultApi } from '../../api/apis';
 import { EntPositionassingment } from '../../api/models/EntPositionassingment';
-
+import moment from 'moment';
 
 const useStyles = makeStyles({
  table: {
@@ -59,7 +59,7 @@ export default function ComponentsTable() {
              <TableCell align="center">{item.edges?.user?.eMAIL}</TableCell>
              <TableCell align="center">{item.edges?.position?.nameposition}</TableCell>
              <TableCell align="center">{item.edges?.department?.departmentname}</TableCell>
-             <TableCell align="center">{item.dayStart}</TableCell>
+             <TableCell align="center">{moment(item.dayStart).format('DD/MM/YYYY')}</TableCell>
              <TableCell align="center">
              <Button
                  onClick={() => {
