@@ -1,5 +1,5 @@
 import { createPlugin } from '@backstage/core';
-import WelcomePage from './components/WelcomePage';
+import WelcomePage from './components/Login';
 import adddata from './components/Adddata';
 import main from './components/Main';
 
