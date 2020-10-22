@@ -13,7 +13,7 @@ import {
 
 
 const WelcomePage: FC<{}> = () => {
- const profile = { givenName: 'to Department' };
+ const profile = { givenName: 'to PositionAssingment' };
  
  return (
    <Page theme={pageTheme.home}>
