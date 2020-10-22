@@ -187,6 +187,7 @@ export default function Create() {
                 className={classes.margin}
                 variant="outlined"
                 style={{ marginLeft: 560, width: 600 }}
+                
               >
                 <InputLabel id="physician_id-label">Physician</InputLabel>
                 <Select
@@ -259,7 +260,7 @@ export default function Create() {
                 <Button
                   style={{ marginLeft: 1 }}
                   component={RouterLink}
-                  to="/login"
+                  to="/main"
                   variant="contained"
                 >
                   Back

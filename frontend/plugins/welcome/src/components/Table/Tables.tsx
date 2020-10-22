@@ -59,7 +59,7 @@ export default function ComponentsTable() {
              <TableCell align="center">{item.edges?.user?.eMAIL}</TableCell>
              <TableCell align="center">{item.edges?.position?.nameposition}</TableCell>
              <TableCell align="center">{item.edges?.department?.departmentname}</TableCell>
-             <TableCell align="center">{moment(item.dayStart).format('DD/MM/YYYY')}</TableCell>
+             <TableCell align="center">{moment(item.dayStart).format('DD/MM/YYYY ')}</TableCell>
              <TableCell align="center">
              <Button
                  onClick={() => {
